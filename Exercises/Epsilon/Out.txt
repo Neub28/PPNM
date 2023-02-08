@@ -1,0 +1,12 @@
+My max int is 2147483647
+MaxValue method gives 2147483647
+My min int is -2147483648
+MinValue method gives -2147483648
+Epsilon for type double is 2.22044604925031E-16
+Should be: 2.22044604925031E-16
+Epsilon for type float is 1.192093E-07
+Should be: 1.19209289550781E-07
+sumA - 1 = 0, but should be 1.11022302462516E-10
+sumB - 1 = 1.11022302462516E-10, but should be 1.11022302462516E-10
+Using approx-function on sumA: returns True
+Using approx-function on sumB: returns True
