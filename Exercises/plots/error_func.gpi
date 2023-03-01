@@ -1,0 +1,12 @@
+set terminal svg
+set key bottom right
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Error function"
+set output "Error_func.svg"
+plot [-5:5] [-5:5] \
+"error_func.data" with lines linetype 1 title "Theory" \
+, "tab_erf.data" with points pointtype 4 title "Tab values"                                                          
