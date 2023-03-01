@@ -20,5 +20,14 @@ static void Main(string[] args) {
 	}
 	outstream.Close();
 	}
+
+	if(args[0] == "-lngamma") {
+	var outstream = new System.IO.StreamWriter("lngamma.data");
+	for(double x = 1.0/128 ; x <= 12; x += 1.0/128) {
+		outstream.WriteLine($"{x} {sfuns.lngamma(x)}");
+	}
+	outstream.Close();
+	}
+	
 	}
 }

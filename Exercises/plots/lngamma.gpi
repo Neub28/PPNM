@@ -1,0 +1,12 @@
+set terminal svg
+set key bottom right
+set xlabel "x"
+set ylabel "y"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Function lngamma"
+set output "Lngamma.svg"
+plot [0:12] [0:24] \
+"lngamma.data" with lines linetype 1 title "Theory" \
+, "tab_lngamma.data" with points pointtype 4 title "Tab values"                                                          
