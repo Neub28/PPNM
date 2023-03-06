@@ -1,0 +1,16 @@
+set terminal eps
+set output "Graph.eps"
+set xlabel "Size of matrix, n"
+set ylabel "User time in seconds"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set title "Operations count for QR-decomposition"
+set key top left
+
+f(x) = a*x**3 + b*x**2 + c*x + d
+fit f(x) 'data_times.txt' via a, b, c, d
+
+plot [0: 650] [0: 2] \
+"data_times.txt" with points pointtype 4 title "Data", \
+f(x) title "Fit: O(N^3)"

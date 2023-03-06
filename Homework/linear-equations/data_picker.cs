@@ -5,7 +5,7 @@ public class data_picker {
 	public static double n, user_time;
 	
 	public static void Main() {
-	char[] delimiters = {'	', '\t', '\n'};
+	char[] delimiters = {' ','\t','\n'};
 	var split_options = StringSplitOptions.RemoveEmptyEntries;
 
 	for(string line = ReadLine(); line != null; line = ReadLine()) {

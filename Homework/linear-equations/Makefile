@@ -1,10 +1,22 @@
 TIME = time --portability --append --output $@
 
+.PHONY : make
+make: Out.txt Graph.eps main.exe data_times.txt 
+
 Out.txt : main.exe 
 	mono main.exe > Out.txt
 
+Graph.eps : graph.gpi data_times.txt
+	gnuplot $<
+
 main.exe: main.cs matrix.dll 
 	mcs main.cs -reference:matrix.dll -out:main.exe
+
+data_times.txt : times_table.txt data_picker.exe
+	mono data_picker.exe < $^ > $@
+
+data_picker.exe : data_picker.cs
+	mcs data_picker.cs
 
 QR_times.exe : QR_times.cs matrix.dll
 	mcs QR_times.cs -reference:matrix.dll -out:QR_times.exe
@@ -24,5 +36,6 @@ times_table.txt : QR_times.exe
 matrix.dll : matrix.cs vector.cs QRGS.cs 
 	mcs -target:library -out:$@ $^
 
+.PHONY: clean
 clean: 
-	rm -f *.dll *.txt *.exe *.svg
+	rm -f *.dll *.txt *.exe *.eps *.log
