@@ -1,0 +1,6 @@
+Task A: Jacobi diagonlization with cyclic sweeps
+------------------------------------------------
+Is V^T A V = D ? True
+Is V D V^T = A ? True
+Is V^T V = 1 ? True
+Is V V^T = 1 ? True

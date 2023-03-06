@@ -8,6 +8,7 @@ Out.txt : main.exe
 
 Graph.eps : graph.gpi data_times.txt
 	gnuplot $<
+	echo "NB: The plot of QR-decomp. of different sizes n er in file Graph.eps"
 
 main.exe: main.cs matrix.dll 
 	mcs main.cs -reference:matrix.dll -out:main.exe
@@ -33,7 +34,7 @@ times_table.txt : QR_times.exe
 	echo n 600 >> $@
 	$(TIME) mono $< -n:600 >>$@
 
-matrix.dll : matrix.cs vector.cs QRGS.cs 
+matrix.dll : ../classes/matrix.cs ../classes/vector.cs QRGS.cs 
 	mcs -target:library -out:$@ $^
 
 .PHONY: clean
