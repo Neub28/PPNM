@@ -1,0 +1,12 @@
+t
+T
+T DONE
+y
+Y
+Y DONE
+dy
+DY
+9	9
+DY DONE
+Passed 
+Fitted value of k = 0.594644463485278, which gives a half-life time of 1.16564976742125 seconds

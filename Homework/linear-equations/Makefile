@@ -1,7 +1,7 @@
 TIME = time --portability --append --output $@
 
 .PHONY : make
-make: Out.txt Graph.eps main.exe data_times.txt 
+make: Out.txt Graph.eps data_times.txt 
 
 Out.txt : main.exe 
 	mono main.exe > Out.txt

@@ -67,6 +67,4 @@ public class jacobi_diag {
 			A[q,j] = -s*apj + c*aqj;
 		}
 	}
-
-
 }
