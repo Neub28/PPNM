@@ -41,11 +41,12 @@ public class QRGS{
 	// Calculates the inverse of A = QR by using back-subs. (solve). 
 	// return:	(matrix) inverse
 	public  matrix inverse() {
-       		matrix inverse = new matrix(R.size1, R.size1);
-		for(int eq = 0; eq < R.size1; eq++) {
-			vector ei = new vector(R.size1); 
+       		matrix inverse = new matrix(Q.size2, Q.size1);
+		vector ei = new vector(Q.size1);
+		for(int eq = 0; eq < Q.size1; eq++) {
 			ei[eq] = 1;
-			inverse[eq] = solve(ei);	
+			inverse[eq] = solve(ei);
+			ei[eq] = 0;	
 		}
 		return inverse;
 	}

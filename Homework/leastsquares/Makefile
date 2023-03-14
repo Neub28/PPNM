@@ -1,4 +1,12 @@
 
+.PHONY : all
+all : 224Ra.svg Out.txt
+
+224Ra.svg : 224Ra.gpi data_table.txt
+	gnuplot $<
+
+data_table.txt : Out.txt
+
 Out.txt : main.exe data.txt
 	mono < data.txt main.exe > Out.txt
 
@@ -19,4 +27,4 @@ matrix.dll : ../classes/vector.cs ../classes/matrix.cs ../classes/QRGS.cs leasts
 
 .PHONY: clean
 clean : 
-	rm -f *.dll *.txt *.exe *.eps
+	rm -f *.dll *.txt *.exe *.svg

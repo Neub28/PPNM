@@ -1,0 +1,21 @@
+set terminal svg font "Times New Roman, 20"
+set terminal svg background "white"
+set output "224Ra.svg"
+
+set title "Activity as a function of time for 224 Ra"
+set xlabel "Time, t [days]"
+set ylabel "Activity (relative units)"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+a = 4.9511553496486 
+k = -0.169887082001008 
+f(x) = a+k*x
+
+set key top left
+
+plot "data_table.txt" using ($1):($2):($3) with yerrorbars title "Measurements", \
+	f(x) with lines linetype 2 title "Fit"
+	
