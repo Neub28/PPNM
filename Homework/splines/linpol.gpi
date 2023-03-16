@@ -1,0 +1,19 @@
+set terminal svg font "Times New Roman, 20"
+set terminal svg background "white"
+set output "linpol.svg"
+
+set title "Linear interpolation of Sin"
+set xlabel "x"
+set ylabel "y"
+
+set xzeroaxis
+set yzeroaxis
+set tics out
+set grid
+
+set key bottom left
+
+plot "pointvalues.txt" with points pointtype 4 title "Points", \
+"intpolvalues.txt" with lines linetype rgb "dark-green" title "Interpolated values", \
+"tabvalues.txt" with lines linetype rgb "blue" title "Tabulated values", \
+"integralvalues.txt" with lines linetype rgb "red" title "Integral"

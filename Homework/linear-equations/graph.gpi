@@ -12,5 +12,5 @@ f(x) = a*x**3 + b*x**2 + c*x + d
 fit f(x) 'data_times.txt' via a, b, c, d
 
 plot [0: 650] [0: 2] \
-"data_times.txt" with points pointtype 4 title "Data", \
+"data_times.txt" with points pointtype 2 title "Data", \
 f(x) title "Fit: O(N^3)"
