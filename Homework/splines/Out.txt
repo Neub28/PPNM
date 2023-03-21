@@ -1,0 +1,22 @@
+The file linpol.svg contains a plot of the linear spline of a Sine function and its antiderivative.
+====================================================================
+The following are the results of the program calculating the c's and b's for my quadratic spline.
+Additionally is a plot of the splines and the tables in the file qspline.svg
+For the first table: y = 1 = c_i(x-x_i)² + b_i(x-x_i) + y_i
+c	calc.	b	calc.	y	calc.
+0	0	0	0	1	1
+0	0	0	0	1	1
+0	0	0	0	1	1
+0	0	0	0	1	1
+For the second table: y = x = c_i(x-x_i)² + b_i(x-x_i) + y_i
+c	calc.	b	calc.	y	calc.
+0	0	1	1	1	1
+0	0	1	1	2	2
+0	0	1	1	3	3
+0	0	1	1	4	4
+For the third table: y = x² = c_i(x-x_i)² + b_i(x-x_i) + y_i
+c	calc.	b	calc.	y	calc.
+1	1	2	2	1	1
+1	1	4	4	4	4
+1	1	6	6	9	9
+1	1	8	8	16	16

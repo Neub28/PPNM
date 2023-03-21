@@ -1,17 +1,20 @@
 
 .PHONY : all
-all : linpol.svg Out.txt
+all : linpol.svg qspline.svg Out.txt
+
+qspline.svg : qspline.gpi qtabvalues.txt qsplinevalues.txt
+	gnuplot $<
 
 linpol.svg : linpol.gpi tabvalues.txt intpolvalues.txt pointvalues.txt integralvalues.txt
 	gnuplot $<
 
-Out.txt tabvalues.txt intpolvalues.txt pointvalues.txt : main.exe
+Out.txt tabvalues.txt intpolvalues.txt pointvalues.txt qtabvalues.txt qsplinevalues.txt : main.exe
 	mono main.exe > Out.txt
 
 main.exe : main.cs matrix.dll 
 	mcs main.cs -reference:matrix.dll -out:main.exe
 
-matrix.dll : ../classes/*.cs linearinterpol.cs
+matrix.dll : ../classes/*.cs linearinterpol.cs qspline.cs
 	mcs -target:library -out:$@ $^
 
 .PHONY: clean
