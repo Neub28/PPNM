@@ -70,23 +70,38 @@ class main {
 		qspline q3 = new qspline(x_b, y3);
 		
 		var qstream = new StreamWriter("qsplinevalues.txt");		
-		
+		var intstream = new StreamWriter("integralvalues.txt");
+		var derivstream = new StreamWriter("derivvalues.txt");
+
 		double step2 = (x_b[4]-x_b[0])/(N-1);
 		for(int i = 0; i < N; i++) {
 			double z = x_b[0]+i*step2;
+			
 			double s1 = q1.evalute(z);
+			double s1_int = q1.integral(z);
+			double s1_der = q1.derivative(z);
+
 			double s2 = q2.evalute(z);
+			double s2_int = q2.integral(z);
+			double s2_der = q2.derivative(z);
+
 			double s3 = q3.evalute(z);
+			double s3_int = q3.integral(z);
+			double s3_der = q3.derivative(z);
 
 			qstream.WriteLine($"{z}	{s1}	{s2}	{s3}");
+			intstream.WriteLine($"{z}	{s1_int}	{s2_int}	{s3_int}");
+			derivstream.WriteLine($"{z}	{s1_der}	{s2_der}	{s3_der}");
 
 		}
 		qstream.Close();
-	
+		intstream.Close();
+		derivstream.Close();
+
 		WriteLine("The file linpol.svg contains a plot of the linear spline of a Sine function and its antiderivative.");
 		WriteLine("====================================================================");
 		WriteLine("The following are the results of the program calculating the c's and b's for my quadratic spline.");
-		WriteLine("Additionally is a plot of the splines and the tables in the file qspline.svg");
+		WriteLine("Additionally is a plot of the splines, their antiderivative and derivative in the file qspline.svg");
 		WriteLine("For the first table: y = 1 = c_i(x-x_i)² + b_i(x-x_i) + y_i");
 	       	WriteLine("c	calc.	b	calc.	y	calc.");
 		for(int i = 0; i < 4; i++) {

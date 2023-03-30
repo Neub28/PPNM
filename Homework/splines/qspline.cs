@@ -73,6 +73,32 @@ public class qspline {
 		return y[i] + b[i]*(z-x[i]) + c[i]*Pow(z-x[i],2);
 
 	}
+	public double integral(double z) {
+		int iz = binsearch(x, z);
+		double sum = 0, dx; 
+		for(int i = 0; i <= iz; i++) {
+			dx = x[i+1] - x[i];
+			
+			if(i == iz) dx = z - x[iz];
+
+			sum += y[i]*dx+0.5*b[i]*Pow(dx,2)+1.0/3.0*c[i]*Pow(dx,3);
+
+		}
+		return sum;
+
+	}
+	public double derivative(double z) {
+		int iz = binsearch(x, z); 
+		double sum = 0, dx;
+		for(int i = 0; i <= iz; i++) {
+			dx = x[i+1] - x[i];
+			
+			if(i == iz) dx = z - x[iz];
+
+			sum += b[i]+2*c[i]*dx;
+		}
+		return sum;
+	}
 
 
 }
