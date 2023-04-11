@@ -1,8 +1,11 @@
 
+lotka.svg : lotka.gpi diffeq3.txt
+	gnuplot $<
+
 diffeq.svg : diffeq.gpi diffeq1.txt diffeq2.txt
 	gnuplot $<
 
-Out.txt diffeq1.txt diffeq2.txt : main.exe
+Out.txt diffeq1.txt diffeq2.txt diffeq3.txt : main.exe
 	mono main.exe
 
 main.exe : main.cs matrix.dll

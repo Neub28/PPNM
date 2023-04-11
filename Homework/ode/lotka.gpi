@@ -1,0 +1,18 @@
+set terminal svg font "Times New Roman, 20"
+set terminal svg background "white"
+set output "lotka.svg"
+
+set title "Lotka-Volterra solution"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+set grid
+set key top right
+
+ptype = 6
+psize = 0.3
+
+plot "diffeq3.txt" using 1:2 with points pt ptype ps psize lc rgb "red" title "Solution: x(t)", \
+"diffeq3.txt" using 1:3 with points pt ptype ps psize lc rgb "blue" title "Solution: y(t)" 
+

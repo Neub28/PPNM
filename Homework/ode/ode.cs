@@ -19,11 +19,13 @@ public static class ode {
 
 	}
 	
-	public static (genlist<double>, genlist<vector>) driver ( 
+	public static vector driver ( 
 		Func<double, vector, vector> f,
 		double a,
 		vector ya,
 		double b,
+		genlist<double> xlist = null,
+		genlist<vector> ylist = null, 
 		double h = 0.01,
 		double acc = 0.01, 
 		double eps = 0.01
@@ -33,25 +35,37 @@ public static class ode {
 		double x = a;
 		vector y = ya.copy();
 
-		var xlist = new genlist<double>();
-		xlist.add(x);
-
-		var ylist = new genlist<vector>();
-		ylist.add(y);
+		if(xlist != null && ylist != null) {
+			xlist.add(x);
+			ylist.add(y);
+		}
 		
 		while(true) {
-			if(x >= b) return (xlist, ylist);
+			if(x >= b) return y;
 			if(x + h > b) h = b - x;
 			var (yh, erv) = rkstep12(f,x,y,h);
-			double tol = Max(acc, yh.norm()*eps) * Sqrt(h/(b-a));
-			double err = erv.norm();
-			if(err <= tol) {
-				x += h;
-				y = yh;
-				xlist.add(x);
-				ylist.add(y);
+			
+			vector tol = new vector(erv.size);
+			for(int i = 0; i < y.size; i++) {
+				tol[i] = (acc+eps*Abs(yh[i]))*Sqrt(h/(b-a));
 			}
-			h *= Pow(tol/err, 0.25)*0.95;
+			bool ok = true;
+			for(int i = 0; i < y.size; i++) {
+				if(! (erv[i]<tol[i])) ok = false;
+			}
+			if(ok == true) { 
+				x += h; 
+				y = yh; 
+				if(xlist != null && ylist != null) {
+					xlist.add(x);
+					ylist.add(y);
+				}
+			}
+			double factor = tol[0]/Abs(erv[0]);
+			for(int i = 1; i < y.size; i++) {
+				factor = Min(factor, tol[i]/Abs(erv[i]));
+			}
+			h *= Min(Pow(factor,0.25)*0.95, 2);
 		}
 
 	}
