@@ -28,7 +28,7 @@ class main {
 			diffeq1.WriteLine($"{xs[i]}	{ys[i][0]}	{ys[i][1]}");
 		}
 		diffeq1.Close();
-
+	
 		xs = new genlist<double>();
 		ys = new genlist<vector>();
 
