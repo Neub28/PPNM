@@ -21,10 +21,7 @@ public static class integrator {
 	double err = Abs(Q-q);
 	double tol = d + e * Abs(Q);
 	if( err <= tol ) return Q;
-	else return (double) integrator(f, a, (a+b)/2, d/Sqrt(2), e, f1, f2) + integrator(f, (a+b)/2, b, d/Sqrt(2), e, f3, f4);
- 	
-		//double Q1 = integrate(f, a, (a+b)/2, d/Sqrt(2), e, f1, f2);
-		//double Q2 = integrate(f, (a+b)/2, b, d/Sqrt(2), e, f3, f4);
+	else return integrate(f, a, (a+b)/2, d/Sqrt(2), e, f1, f2) + integrate(f, (a+b)/2, b, d/Sqrt(2), e, f3, f4);
 	}
 
 }
