@@ -2,3 +2,7 @@
 2) x-> [0,1] f(x) = 1/sqrt(x): 2 = 1.99996150007805: True
 3) x-> [0,1] f(x) = 4sqrt(1-x²): 3.14159265358979 = 3.14183457802727: True
 4) x-> [0,1] f(x) = ln(x)/sqrt(x): -4 = -3.99991705899915: True
+A plot of tabulated values and integrated values of the error-function is in the file erf.svg
+Clenshaw-Curtis: x-> [0,1] f(x)=1/sqrt(x): 1.99999201046432 = 2: True with 16 evaluations
+Clenshaw-Curtis: x-> [0, 1] f(x) = ln(x)/sqrt(x): -3.99987385646141 = -4: True with 96 evaluations
+Python completed these integrals in 231 and 315 iterations

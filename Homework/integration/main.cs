@@ -1,5 +1,5 @@
 using System;
-using static System.IO;
+using System.IO;
 using static System.Console;
 using static System.Math;
 
@@ -30,10 +30,26 @@ class main {
 
 		/* Evalute erf(z) from -2 to 2 */
 		var outfile = new StreamWriter("erf.txt");
-		for(double x = -2.0; x >= 2.0; x += 1.0/8) {
+		for(double x = -2.0; x <= 2.0; x += 1.0/16) {
 			outfile.WriteLine($"{x}	{integrator.erf(x)}");
 		}
-
+		outfile.Close();
+		WriteLine("A plot of tabulated values and integrated values of the error-function is in the file erf.svg");
+		/* Testing implementation of Clenshaw-Curtis */
+		
+		/* Integral of 1/sqrt(x) from 0 to 1 */
+		int count = 0;
+		f = delegate(double x) { count++; return 1.0/Sqrt(x); };
+		double ccI1 = integrator.ccintegrate(f, 0, 1);
+		WriteLine($"Clenshaw-Curtis: x-> [0,1] f(x)=1/sqrt(x): {ccI1} = {2}: {integrator.approx(ccI1, 2.0)} with {count} evaluations");
+		
+		/* Integral of ln(x)/sqrt(x) from 0 to 1 */
+		int count2 = 0;
+		f = delegate(double x) { count2++; return Log(x)/Sqrt(x); };
+		double ccI2 = integrator.ccintegrate(f, 0, 1);
+		WriteLine($"Clenshaw-Curtis: x-> [0, 1] f(x) = ln(x)/sqrt(x): {ccI2} = {-4}: {integrator.approx(ccI2, -4)} with {count2} evaluations");
+		
+		WriteLine("Python completed these integrals in 231 and 315 iterations");
 
 		}
 }

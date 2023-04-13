@@ -24,6 +24,21 @@ public static class integrator {
 	else return integrate(f, a, (a+b)/2, d/Sqrt(2), e, f1, f2) + integrate(f, (a+b)/2, b, d/Sqrt(2), e, f3, f4);
 	}
 	
+	public static double ccintegrate
+	(
+	Func<double, double> f, 
+	double a, 
+	double b, 
+	double d = 0.001,
+	double e = 0.001 
+	) {
+	Func<double, double> f_new = delegate(double theta) { 
+		return f((a+b)/2+(b-a)/2*Cos(theta))*Sin(theta)*(b-a)/2; 
+		};
+	return integrate(f_new, 0, PI, d, e);
+
+	}
+	
 	public static bool approx(double a, double b, double d=0.001, double e=0.001) {
 	/* Check for absolute accuracy  */
 	if(Abs(a-b) < d) return true;
@@ -41,8 +56,8 @@ public static class integrator {
 		f = delegate(double x) { return Exp(-Pow(x,2)); };
 		return 2.0/Sqrt(PI)*integrate(f, 0, z);
 		}
-	else if(z>1.0) {
-		f = delegate(double x) { return Exp(-Pow(z+(1-x)/x, 2)/x/x); };
+	else {
+		f = delegate(double x) { return Exp(-Pow(z+(1-x)/x, 2))/(x*x); };
 		return 1.0-2.0/Sqrt(PI)*integrate(f, 0, 1);		
 
 		}
