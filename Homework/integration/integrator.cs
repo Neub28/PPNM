@@ -23,5 +23,31 @@ public static class integrator {
 	if( err <= tol ) return Q;
 	else return integrate(f, a, (a+b)/2, d/Sqrt(2), e, f1, f2) + integrate(f, (a+b)/2, b, d/Sqrt(2), e, f3, f4);
 	}
+	
+	public static bool approx(double a, double b, double d=0.001, double e=0.001) {
+	/* Check for absolute accuracy  */
+	if(Abs(a-b) < d) return true;
+	/* Check for relative accuracy */
+	if(Abs(a-b)/Max(Abs(a), Abs(b)) < e) return true;
+	/* No passed tests -> false */
+	return false;
 
+	}
+
+	public static double erf(double z) {
+	Func<double, double> f;
+	if(z < 0.0) return -erf(-z);
+	if(z >= 0.0 && z <= 1.0) {
+		f = delegate(double x) { return Exp(-Pow(x,2)); };
+		return 2.0/Sqrt(PI)*integrate(f, 0, z);
+		}
+	else if(z>1.0) {
+		f = delegate(double x) { return Exp(-Pow(z+(1-x)/x, 2)/x/x); };
+		return 1.0-2.0/Sqrt(PI)*integrate(f, 0, 1);		
+
+		}
+
+
+	}
+ 
 }

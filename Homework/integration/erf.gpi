@@ -1,0 +1,14 @@
+set terminal svg font "Times new Roman, 20"
+set terminal svg background "white"
+set output "erf.svg"
+set title "Plot of error function with adaptive integrator"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+set grid
+set key bottom right
+
+len = 5 
+
+plot [-2:2][-1:1] for [x=-len:len:1] erf(x) with points pt 14 ps 0.5 linecolor rgb "red"title (x==len ? "Tabulated values" : "")
