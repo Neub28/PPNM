@@ -11,7 +11,7 @@ set yzeroaxis
 set tics out
 set grid
 
-set key bottom left
+set key top right
 
 plot "pointvalues.txt" with points pointtype 4 title "Points", \
 "intpolvalues.txt" with lines linetype rgb "dark-green" title "Interpolated values", \

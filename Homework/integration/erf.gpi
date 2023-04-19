@@ -9,8 +9,9 @@ set yzeroaxis
 set grid
 set key bottom right
 
-len = 5 
+do for [x=-2:2:1] { print x }
+
+len = 2 
 
 plot [-2:2][-1:1] for [x=-len:len:1] erf(x) with points pt 14 ps 0.4 linecolor rgb "red"title (x==len ? "Tabulated values" : ""), \
 "erf.txt" with lines dashtype 1 linewidth 2 linecolor rgb "black" title "Integrated values"
-
