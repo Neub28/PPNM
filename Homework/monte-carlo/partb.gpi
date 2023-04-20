@@ -1,0 +1,35 @@
+set terminal svg font "Times New roman, 20"
+set terminal svg background "white"
+set output "partb.svg"
+
+set multiplot layout 2,1 title "Comparison of Plain Monte-Carlo and Quasi-random sampling" font "Times New Roman, 18" offset 0, 0.5 
+
+
+set xlabel "Number of samples, N" font "Times New Roman, 14" offset 0.5, 0
+set xzeroaxis
+set yzeroaxis
+set tics out
+set grid
+set fit quiet
+
+QINT = "qintg.txt"
+PINT = "pintg.txt"
+
+f(x) = a*1/sqrt(x)+b
+g(x) = 4*pi
+
+psize = 0.7
+
+fit f(x) PINT using 1:3 via a, b
+
+set ylabel "Estimated integral" font "Times New Roman, 14" offset 0, 0.5
+set key bottom right
+
+plot [][11.5:13] QINT using 1:2 with points pointsize psize pointtype 7 lc rgb "red" title "Quasi-random", \
+PINT using 1:2 with points pointsize psize pointtype 7 lc rgb "blue" title "Plain Monte-Carlo", g(x) with lines linewidth 2 dashtype 2 lc rgb "dark-green" title "Analytical" \
+
+set key top right
+set ylabel "Estimated error" font "Times New Roman, 14" offset 0, 0.5
+plot QINT using 1:3 with points pointsize psize pointtype 7 lc rgb "red" title "Quasi-Random", \
+PINT using 1:3 with points pointsize psize pointtype 7 lc rgb "blue" title "Plain Monte-Carlo", f(x) with lines linewidth 2 dashtype 2 lc rgb "dark-blue" title "Fit: N^{(-1/2)}"
+
