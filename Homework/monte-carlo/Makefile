@@ -15,3 +15,7 @@ main.exe : main.cs matrix.dll
 
 matrix.dll : ../classes/*.cs mcint.cs
 	mcs -target:library -out:$@ $^
+
+.PHONY : 
+clean : 
+	rm -f *.svg *.txt *.exe *.dll
