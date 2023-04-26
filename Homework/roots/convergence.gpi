@@ -1,0 +1,27 @@
+set terminal svg font "Times New Roman, 20"
+set terminal svg background "white"
+set output "convergence.svg"
+
+##set margins 2,3,2,3
+
+set multiplot layout 2,2 title "Investigation of convergence" font "Times New Roman, 18" offset 0.2, 0.6
+set ylabel "Lowest energy root, E_{0}"
+set tics out
+
+#set size square
+
+pty = 6
+
+f(x) = -0.5
+
+set xlabel "rmin" font "Times New Roman, 14" offset 0,0
+plot [0.1:0.5][-1:1] "rmin.txt" with points pointtype pty lc rgb "red" title "Const. r_{max} = 8", f(x) lw 2 dt 2 lc rgb "black" title "Analytical"
+set xlabel "rmax" font "Times New Roman, 14" offset 0,0
+unset ylabel
+plot [1:5][-1:1] "rmax.txt" with points pointtype pty lc rgb "red" title "Const. r_{min} = 0.01", f(x) lw 2 dt 2 lc rgb "black" title "Analytical"
+set xlabel "acc" font "Times New Roman, 14" offset 0, 0
+set ylabel "Lowest energy root, E_{0}"
+plot [0.01:0.05][-1:1] "acc.txt" with points pt pty lc rgb "red" title "Const. {/Symbol e}  = 0.01", f(x) lw 2 dt 2 lc rgb "black" title "Analytical"
+set xlabel "eps" font "Times New Roman, 14" offset 0, 0
+unset ylabel
+plot [0.01:0.05][-1:1] "eps.txt" with points pt pty lc rgb "red" title "Const. acc = 0.01", f(x) lw 2 dt 2 lc rgb "black" title "Analytical"

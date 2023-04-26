@@ -8,6 +8,7 @@ class main{
 
 	static void Main() {
 	partA();
+	partB();
 
 	}
 
@@ -31,6 +32,85 @@ class main{
 	WriteLine($"Test: {vector.approx(rvroot, new vector(1.0, 1.0), 1e-4, 1e-4) ? "PASSED" : "FAILED"}");
 
 	}
+	
+	static void partB() {
+	WriteLine($"--------------------- Part B  --------------------------");
+	/* "Soon to be" generic lists supposed to record path of ODE solver 
+	/* They are not initialized yet to only capture last run...          */
+	genlist<double> xs = null;
+	genlist<vector> ys = null;
+	double rmin; double rmax; double acc; double eps;
 
+	/* Function which takes an energy, uses Runge-Kutta to solve differential equation, which 
+	/* is to be called as the function in the root-finding routine.   */
+	rmin = 0.1;
+	rmax = 8.0;
+	acc = 0.01;
+	eps = 0.01;
+
+	Func<vector, vector> fB = delegate(vector EV) {
+		double E = EV[0];
+		Func<double, vector, vector> fD = delegate(double r, vector y) {
+			return new vector(y[1], -2*(1/r+E)*y[0]);
+		};
+		//double rmin = 0.1;
+		//double rmax = 8.0;
+		vector initcon = new vector(rmin-rmin*rmin, 1-2*rmin);
+		vector ods = ode.driver(fD, rmin, initcon, rmax, xs, ys);
+		return new vector(ods[0]);
+
+	};
+	vector result = roots.newton(fB, new vector(-1.0));
+	WriteLine($"The found root is: E0 = {result[0]}");
+	WriteLine("Whereas the expected result is -0.5.");
+	/* Record path of final result */
+	xs = new genlist<double>();
+	ys = new genlist<vector>();
+	
+	vector odsfinal = fB(new vector(result[0]));
+
+	var out1 = new StreamWriter("wavefunc.txt");
+	for(int i = 0; i < xs.size; i++) {
+		out1.WriteLine($"{xs[i]}	{ys[i][0]}");
+	}
+	out1.Close();
+	
+	WriteLine("In the file convergence.svg I have plotted different values of \n rmax, rmin, acc and eps with their lowest energy roots. \n Note that rerunning main.cs takes quite a while. ");
+
+	var outrmin = new StreamWriter("rmin.txt");
+	for(int i = 1; i < 6; i++) {
+		rmin = (double) i/10.0;
+		vector result_rmin = roots.newton(fB, new vector(-0.8));
+		outrmin.WriteLine($"{rmin}	{result_rmin[0]}");
+	}
+	outrmin.Close();
+
+	rmin = 0.1;
+	var outrmax = new StreamWriter("rmax.txt");
+	for(int i = 1; i < 6; i++) {
+		rmax = i;
+		vector result_rmax = roots.newton(fB, new vector(-0.8));
+		outrmax.WriteLine($"{rmax}	{result_rmax[0]}");
+	}
+	outrmax.Close();
+	
+	var outeps = new StreamWriter("eps.txt");
+	for(int i = 1; i < 6; i++) {
+		eps = (double) i/100.0;
+		vector result_eps = roots.newton(fB, new vector(-0.8));
+		outeps.WriteLine($"{eps}	{result_eps[0]}");
+	}
+	outeps.Close();
+	
+	eps = 0.01;
+	var outacc = new StreamWriter("acc.txt");
+	for(int i = 1; i < 6; i++) {
+		acc = (double) i/100.0;
+		vector result_acc = roots.newton(fB, new vector(-0.8));
+		outacc.WriteLine($"{acc}	{result_acc[0]}");
+	}
+	outacc.Close();
+
+	}
 }
 

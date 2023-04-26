@@ -1,0 +1,21 @@
+set terminal svg font "Times New Roman"
+set terminal svg background "white"
+set output "wavefunc.svg"
+
+FONT = "Times New Roman, 14"
+FILE = "wavefunc.txt"
+
+set title "Comparison of numerical and analytical result" font "Times New Roman, 18" offset 0, -0.5
+set xlabel "Distance, r" font FONT offset 0.5, 0
+set ylabel "Wavefunction, ψ(r)" font FONT offset 0, 0.5
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+set grid
+
+f(x) = x*exp(-x)
+
+plot f(x) lw 2 dt 1 lc rgb "black" title "Analytical", \
+"wavefunc.txt" with points pointtype 15 pointsize 0.5 lc rgb "dark-red" title "Numerical"
+

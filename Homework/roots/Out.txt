@@ -5,3 +5,9 @@ f(x) = x+5: (x) = (-5)
 Test: PASSED
 Rosenbrock: (x,y) = (0.999999151101118, 0.999998285067183)
 Test: PASSED
+--------------------- Part B  --------------------------
+The found root is: E0 = -0.501930938897126
+Whereas the expected result is -0.5.
+In the file convergence.svg I have plotted different values of 
+ rmax, rmin, acc and eps with their lowest energy roots. 
+ Note that rerunning main.cs takes quite a while. 
