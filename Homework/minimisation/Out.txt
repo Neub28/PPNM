@@ -22,3 +22,9 @@ Start value:		(4, -2)
 Numerical result:	(3.58442833325963,-1.84812653274018) 	with 11 counts
 Analytical result:	(3.584428, -1.848126)
 Test:			PASSED
+----------------------------------- Part B ---------------------
+Parameters:	m = 125.975484794067 GeV
+		Γ = 1.42866279679112 ??
+		A = 6.87202600115688 ??
+with 		2614 tries.
+A plot of the fit and data is in file: higgsfit.svg

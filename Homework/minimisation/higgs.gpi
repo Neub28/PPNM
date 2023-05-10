@@ -1,0 +1,15 @@
+set terminal svg font "Times New Roman, 18"
+set terminal svg background "white"
+set output "higgsfit.svg"
+
+set title "Quasi-Newton: Breit-Wigner fit for Higgs-boson" font "Times New Roman, 22" offset 0, 0.2
+set xlabel "Energy, E [GeV]" font "Times New Roman, 16" offset 0,-0.2
+set ylabel "Signal, σ(E)" font "Times New Roman, 16" offset -0.2, 0
+
+set grid 
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+plot "bwfit.txt" with lines linewidth 2 dashtype 1 lc rgb "black" title "Fit", \
+"Higgs.txt" using 1:2:3 with errorbars pointtype 7 pointsize 0.7 lc rgb "dark-blue" title "Data"
