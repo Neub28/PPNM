@@ -1,0 +1,18 @@
+set terminal svg font "Times New Roman, 18"
+set terminal svg background "white"
+set output "plotA.svg"
+
+set title "Artifical neural network compared to analytical function" font "Times New Roman, 18"
+
+set grid
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+psi = 0.3
+pty = 7
+
+f(x) = cos(5*x-1)*exp(-x*x)
+
+plot "annvalues.txt" with points pointsize psi pointtype pty lc rgb "red" title "ANN", \
+f(x) with lines dashtype 1 linewidth 2 lc rgb "black" title "Analytical"

@@ -2,24 +2,24 @@
 I am now testing my Quasi-Newton minimisation routine.
 Rosenbrock's valley function: f(x,y) = (1-x)²+100(y-x²)²
 Start value:		(-2, -2)
-Numerical result:	(0.999995523352196,0.999991039278324) 	with 24481 counts
+Numerical result:	(0.999995523352261,0.999991039278455) 	with 45792 counts
 Analytical result:	(1,1)
 Test:			PASSED
 Himmelblau's function: f(x,y) = (x²+y-11)²+(x+y²-7)²
 Start value:		(3.5, 2.5)
-Numerical result:	(2.99999999352048,1.99999999638802) 	with 332 counts
+Numerical result:	(2.99999999352052,1.99999999638792) 	with 339 counts
 Analytical result:	(3,2)
 Test:			PASSED
 Start value:		(-3, 3)
-Numerical result:	(-2.80511809424561,3.13131251092682) 	with 176 counts
+Numerical result:	(-2.80511809424685,3.13131251092774) 	with 180 counts
 Analytical result:	(-2.805118, 3.131312)
 Test:			PASSED
 Start value:		(-4, -4)
-Numerical result:	(-3.77931026341263,-3.2831860019403) 	with 191 counts
+Numerical result:	(-3.77931026341264,-3.2831860019403) 	with 190 counts
 Analytical result:	(-3.779310, -3.283186)
 Test:			PASSED
 Start value:		(4, -2)
-Numerical result:	(3.58442833325963,-1.84812653274018) 	with 11 counts
+Numerical result:	(3.58442833325967,-1.84812653270682) 	with 848 counts
 Analytical result:	(3.584428, -1.848126)
 Test:			PASSED
 ----------------------------------- Part B ---------------------
