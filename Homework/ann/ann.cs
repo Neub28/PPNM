@@ -1,9 +1,11 @@
 using System;
+using static System.Console;
 using static System.Math;
 
 
 public class ann {
 	public int n; /* number of neurons */
+	public int lastTries;
 	public Func<double, double> f = x => x*Exp(-Pow(x,2));
 	public Random random = new Random();
 	public vector p; 
@@ -11,9 +13,10 @@ public class ann {
 	/* Constructor  */
 	public ann(int n) {	
 		this.n = n;
+		this.lastTries = 0;
 		double[] ar = new double[n*3];
 		for(int i = 0; i < (n*3); i++) {
-			ar[i]=random.NextDouble();
+			ar[i]= (double) random.NextDouble()*1-0.5;
 		}
 		this.p = new vector(ar);
 
@@ -34,6 +37,7 @@ public class ann {
 
 	public void train(vector x, vector y) {
 	if(x.size != y.size) throw new ArgumentException("Input arrays are not equal in length.");
+	Error.WriteLine("Training in progress.....");
 	Func<vector, double> Cp = delegate(vector ps) {
 		double Cpsum = 0;
 		for(int i = 0; i < x.size; i++) {
@@ -52,10 +56,10 @@ public class ann {
 		return Cpsum;
 	};
 	/* Use Quasi-Newton minimisation routine */
-	var tuple = minimisation.qnewton(Cp, this.p, 1e-1);
+	var res = minimisation.qnewton(Cp, this.p, 1e-3);
 	/* Save values of minimisation */
-	this.p = tuple.Item1;
-	
+	this.p = res.Item1;
+	Error.WriteLine($"Training succesfull with: {res.Item2} tries.");
 	}
 
 

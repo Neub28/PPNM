@@ -12,31 +12,34 @@ class main {
 		ann AI = new ann(3);
 		WriteLine($"Starting parameters for ANN: ");
 		for(int i = 0; i < AI.p.size; i++) {
-			WriteLine($"{AI.p[i]}");
+			Write($"{AI.p[i]}\t");
+			if(i%3 == 0 && i != 0) WriteLine("");
 		}
 
 		f = delegate(double x) {
 			return Cos(5*x-1)*Exp(-x*x);
 		};
-		x = new vector(200);
-		y = new vector(200);
-
+		int size = 200;
+		x = new vector(size);
+		y = new vector(size);
+		
 		for(int i = -100; i < 100; i++) {
-			double val = (double) i/100.0;
-			x[i+100]= val;
-			y[i+100]=f(val);
+			x[i+100] = (double) i/100;
+			y[i+100] = f(x[i+100]);
 		}
-		Error.WriteLine("Training ANN...");
-		for(int i = 0; i < 2; i++) {
-			AI.train(x, y);
-		}
+		AI.train(x, y);
 		
 		var annout = new StreamWriter("annvalues.txt");
 		for(int i = 0; i < x.size; i++) {
 			annout.WriteLine($"{x[i]}	{AI.response(x[i])}");
 		}
 		annout.Close();
-		
+
+		WriteLine("\nFinal parameters:");
+		for(int i = 0; i < AI.p.size; i++) {
+			Write($"{AI.p[i]}   ");
+			if(i%3 == 0 && i != 0) WriteLine("");
+		}
 
 	}
 }
