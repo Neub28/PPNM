@@ -111,12 +111,10 @@ public static class minimisation {
 		}
 		vector pce = new vector(dim);
 		for(int i = 1; i < npoints; i++) {
-			vector sum = vecs[0];
-			if(i != hi) {
-				sum += vecs[i];
-			}
-			pce = 1.0/dim * sum;
+			if(i != hi) pce += vecs[i];
 		}
+		pce /= dim;
+
 		
 		foreach(vector v in vecs) {
 			Error.WriteLine($"{v[0]}  {v[1]}  {v[2]}");
