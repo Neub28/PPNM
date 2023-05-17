@@ -16,6 +16,7 @@ class main {
 	static void Main() {
 		partA();
 		partB();
+		partC();
 	}
 	static void startres(vector s, vector r, int c) {	
 		WriteLine($"Start value:		({s[0]}, {s[1]})");
@@ -120,6 +121,19 @@ class main {
 
 		outfit.Close();
 		WriteLine("A plot of the fit and data is in file: higgsfit.svg");
+
+	}
+
+	static void partC() {
+		vector v1 = new vector(122, 0.5, 5);
+		
+		(res, count) = minimisation.simplex(D, v1, 1e-3, step:0.5);
+		WriteLine("----------------- PART C -----------------");
+		WriteLine($"Parameters:	m = {res[0]} GeV");
+		WriteLine($"		Γ = {res[1]} ??");
+		WriteLine($"		A = {res[2]} ??");
+		WriteLine($"with 		{count} tries.");
+
 
 	}
 

@@ -10,27 +10,43 @@ public class ann {
 	public Random random = new Random();
 	public vector p; 
 	
+	/* Methods for setting values in parameter vector p. */
+	public void seta(int i, double z) { p[i*3] = z; }
+	public void setb(int i, double z) { p[i*3+1] = z; }
+	public void setw(int i, double z) { p[i*3+2] = z; }
+	/* Methods for getting values in parameter vector input p. */
+	public double geta(int i) { return p[i]; }
+	public double getb(int i) { return p[i*3+1]; }
+	public double getw(int i) { return p[i*3+2]; }
+	public double getRnd() { return random.NextDouble()-0.5; }
+	
 	/* Constructor  */
 	public ann(int n) {	
 		this.n = n;
-		this.lastTries = 0;
-		double[] ar = new double[n*3];
-		for(int i = 0; i < (n*3); i++) {
-			ar[i]= (double) random.NextDouble()*1-0.5;
+		p = new vector(3*n);
+		for(int i = 0; i < n; i++) {
+			seta(i, getRnd());
+			setb(i, getRnd());
+			setw(i, getRnd());
 		}
-		this.p = new vector(ar);
-
+		//double[] ar = new double[n*3];
+		//for(int i = 0; i < (n*3); i++) {
+		//	ar[i]= (double) random.NextDouble()*1-0.5;
+		//}
+		//this.p = new vector(ar);
 	}
+	public ann(int n, double[] ps) {
+		if(ps.Length != 3*n) throw new ArgumentException("Array size is wrong.");
+		this.n = n;
+		p = new vector(ps);
+	}
+
 	/* Returns network response, denoted Fp(x). */
 	public double response(double x) {
 	double Fp = 0;
 	/* Sum over all neurons */
 	for(int i = 0; i < n; i++) {
-		/* i'th neuron has ai, bi & wi in vector p */
-		double ai = p[i*3];
-		double bi = p[i*3+1];
-		double wi = p[i*3+2];
-		Fp += f((x-ai)/bi)*wi;
+		Fp += f((x-geta(i))/getb(i))*getw(i);
 	}
 	return Fp;
 	}
@@ -49,6 +65,7 @@ public class ann {
 				double bi = ps[ni*3+1];
 				double wi = ps[ni*3+2];
 				Fpxi += f((x[i]-ai)/bi)*wi;
+				//Fpxi += f((x[i]-geta(ni, ps))/getb(ni, ps))*getw(ni, ps);
 			}
 
 			Cpsum += Pow(Fpxi-y[i],2);
@@ -56,7 +73,7 @@ public class ann {
 		return Cpsum;
 	};
 	/* Use Quasi-Newton minimisation routine */
-	var res = minimisation.qnewton(Cp, this.p, 1e-3);
+	var res = minimisation.qnewton(Cp, this.p, 1e-6);
 	/* Save values of minimisation */
 	this.p = res.Item1;
 	Error.WriteLine($"Training succesfull with: {res.Item2} tries.");

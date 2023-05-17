@@ -11,7 +11,7 @@ Out.txt annvalues.txt : main.exe
 main.exe : main.cs nummethods.dll
 	mcs main.cs -reference:nummethods.dll
 
-nummethods.dll : ../classes/*.cs ../minimisation/minimisation.cs ann.cs
+nummethods.dll : ../classes/*.cs minimisation.cs ann.cs
 	mcs -target:library -out:$@ $^
 
 .PHONY : 
