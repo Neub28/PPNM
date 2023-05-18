@@ -73,10 +73,11 @@ public static class minimisation {
 
 
 	public static (vector, int) simplex
-	(Func<vector, double> f, vector init, double sizegoal, double step=1.0/64, double countlim = 100000) {
+	(Func<vector, double> f, vector init, double sizegoal, double step, double countlim = 100000) {
 	int dim = init.size;
 	int npoints = dim + 1;
 	vector[] vecs = new vector[npoints];
+	double[] fs = new double[npoints];
 	
 	/* Last element is initial vector. All other elements are steps in all possible directions. */
 	vecs[dim] = init.copy();
@@ -84,6 +85,7 @@ public static class minimisation {
 	for(int i = 0; i < dim; i++) {
 		init[i] += step;
 		vecs[i] = init.copy();
+		fs[i] = f(vecs[i]);
 		init[i] -= step;
 
 	}
@@ -91,26 +93,24 @@ public static class minimisation {
 	int hi = 0;
 	int lo = 0; 
 	int counts = 0;
-	vector phi = vecs[hi];
-	vector plo = vecs[lo];
 
 	/* REPEAT  */
 	do {
 		counts ++;
 		hi = 0; lo = 0;
-		phi = vecs[hi];
-		plo = vecs[lo];
+		double fhi = fs[hi];
+		double flo = fs[lo];
 
 		if(counts > countlim) {
 			Error.WriteLine("Number of operations exceeded.");
 		}
 		/* Find highest-, lowest- and centroid-point(s) */
 		for(int i = 1; i < npoints; i++) {
-			if(f(vecs[i]) > f(phi) ) phi = vecs[i]; hi = i;
-			if(f(vecs[i]) < f(plo) ) plo = vecs[i]; lo = i;
+			if(fs[i] > fhi ) fhi = fs[i]; hi = i;
+			if(fs[i] < flo ) flo = fs[i]; lo = i;
 		}
 		vector pce = new vector(dim);
-		for(int i = 1; i < npoints; i++) {
+		for(int i = 0; i < npoints; i++) {
 			if(i != hi) pce += vecs[i];
 		}
 		pce /= dim;
@@ -121,36 +121,37 @@ public static class minimisation {
 		}
 
 		/* Try reflection */	
-		vector pre = pce+pce-phi;
-		if(f(pre) < f(plo)) {
+		vector pre = pce+pce-vecs[hi];
+
+		if(f(pre) < flo) {
 			/* Try expansion */
-			vector pex = pce+2*(pce-phi);
+			vector pex = pce+2*(pce-vecs[hi]);
 			if(f(pex) < f(pre)) {
 				/* Accept expansion */
-				phi = pex;
+				vecs[hi] = pex;
 			}
 			else {
 				/* Accept reflection */
-				phi = pre;
+				vecs[hi] = pre;
 			}
 		}
 		else {
-			if(f(pre) < f(phi)) {
+			if(f(pre) < fhi) {
 				/* Accept reflection */
-				phi = pre;
+				vecs[hi] = pre;
 			}
 			else {
 				/* Try contraction */
-				vector pco = pce+0.5*(phi-pce);
-				if(f(pco) < f(phi)) {
+				vector pco = pce+0.5*(vecs[hi]-pce);
+				if(f(pco) < fhi) {
 					/* Accept contraction */
-					phi = pco;
+					vecs[hi] = pco;
 				}
 				else {
 					/* Do reduction */
 					for(int i = 0; i < npoints; i++) {
 						if(i != lo) {
-							vecs[i] = 0.5*(vecs[i]-plo);
+							vecs[i] = 0.5*(vecs[i]+vecs[lo]);
 						}
 					}
 					}
@@ -160,7 +161,7 @@ public static class minimisation {
 	
 	Error.WriteLine($"size {simplex_size(vecs)} \t sizegoal {sizegoal}");
 
-	return (plo, counts);
+	return (vecs[lo], counts);
 	}
 	
 
