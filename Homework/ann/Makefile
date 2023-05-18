@@ -1,11 +1,14 @@
 .PHONY : 
 all : Out.txt plotA.svg
+
+.PHONY :
+open : 
 	xdg-open plotA.svg
 
 plotA.svg : plota.gpi
 	gnuplot $<
 
-Out.txt annvalues.txt : main.exe
+Out.txt annvalues.txt simvalues.txt trainingpoints.txt: main.exe
 	mono main.exe > Out.txt
 
 main.exe : main.cs nummethods.dll

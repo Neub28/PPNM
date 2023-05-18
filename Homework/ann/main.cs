@@ -12,11 +12,15 @@ class main {
 		partA();
 
 	}
-	static void makexy() {
+
+	static void partA() {
+		WriteLine("-------------- PART A ------------------");
+		WriteLine("I have implemented an artifical neural network,\twhich can use either Quasi-Newton- or simplex-minimisation.");
+		WriteLine("I will test both of these implementations.");
 		f = delegate(double x) {
 			return Cos(5*x-1)*Exp(-x*x);
 		};
-		int size = 30;
+		int size = 20;
 		x = new double[size];
 		y = new double[size];
 		double a = -1;
@@ -29,20 +33,14 @@ class main {
 			outpoints.WriteLine($"{x[i]}	{y[i]}");
 		}
 		outpoints.Close();
-	}
 
-	static void partA() {
-		WriteLine("-------------- PART A ------------------");
-		WriteLine("I have implemented an artifical neural network,\twhich can use either Quasi-Newton- or simplex-minimisation.");
-		WriteLine("I will test both of these implementations.");
-		
 		ann annQN = new ann(3);
 		ann annSI = new ann(3);
-		makexy();
+		
 		Error.WriteLine("Quasi-Newton training...");
 		annQN.train(x,y, method:"qnewton", precision:1e-3);
 		Error.WriteLine("Simplex training...");
-		annSI.train(x,y, method:"simplex", precision:1e-3, step:0.7);
+		annSI.train(x,y, method:"simplex", precision:1e-6, step:0.7);
 		
 		WriteLine("\nFinal parameters: Quasi-Newton");
 		for(int i = 0; i < annQN.p.size; i++) {
@@ -54,10 +52,23 @@ class main {
 			Write($"{annSI.p[i]}   ");
 			if((i+1)%3 == 0) WriteLine("");
 		}
+		WriteLine("The plots of the trained networks are in plotA.svg.");
+		WriteLine("The simplex method seems to be much more robust and stable than the qnewton.");
+		WriteLine("Whilst the qnewton method is very sensitive to precision the simplex simply \nalways returns something reasonable.");
+		WriteLine("Both networks are however very nice compared to the analytical function, and seems \n to be in fine agreement with the parameters.");
 			
+		
+		var outQN = new StreamWriter("annvalues.txt");
+		var outSI = new StreamWriter("simvalues.txt");
+		for(int i = 0; i < x.Length; i++) {
+			outQN.WriteLine($"{x[i]}	{annQN.response(x[i])}");
+			outSI.WriteLine($"{x[i]}	{annSI.response(x[i])}");
+		}
+		outQN.Close();
+		outSI.Close();
 
-		printVals(annQN, "annvalues.txt");
-		printVals(annSI, "simvalues.txt");
+		//printVals(annQN, "annvalues.txt");
+		//printVals(annSI, "simvalues.txt");
 
 	}
 	static void findParams() {

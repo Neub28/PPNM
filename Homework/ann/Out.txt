@@ -3,11 +3,17 @@ I have implemented an artifical neural network,	which can use either Quasi-Newto
 I will test both of these implementations.
 
 Final parameters: Quasi-Newton
--2.3445470585837   -0.32199432040239   1.88823714676252   
-1.45042858985845   1.7310046850575   1.50293347865781   
-0.482330558729063   0.487706159150182   0.546145634403776   
+-1.73005333946236   -0.0925192704150136   1.0871761971004   
+1.03400775256729   0.444430065630823   0.551306355502376   
+1.08364990257695   2.55633849930181   1.57804959872756   
 
 Final parameters: Simplex
--218.086181300065   4.64739312347298   233.034088753497   
-204.975286895393   176.746296950782   212.226893844067   
-186.380805348912   130.524874317165   183.97542192136   
+-1.28634334574757   -0.0916356280401887   1.09749118767287   
+0.961503658527764   0.502115886393471   0.82454389909518   
+2.2760172035892   3.70585792857955   2.711085334384   
+The plots of the trained networks are in plotA.svg.
+The simplex method seems to be much more robust and stable than the qnewton.
+Whilst the qnewton method is very sensitive to precision the simplex simply 
+always returns something reasonable.
+Both networks are however very nice compared to the analytical function, and seems 
+ to be in fine agreement with the parameters.

@@ -55,25 +55,23 @@ public class ann {
 		setb(i,1);
 		seta(i,x[0]+(x[x.Length-1]-x[0])*i/(n-1)); 
 	}
-
-	Func<vector, double> Cp = delegate(vector ps) {
-		double sum = 0;
-		ann NN = new ann(ps);
-		for(int i = 0; i < x.Length; i++) {
-			sum += Pow(NN.response(x[i]-y[i]), 2);
-		}
+	Func<vector,double> mismatch = (u) => {
+		ann annu = new ann(u);
+		double sum=0;
+		for(int k=0;k<x.Length;k++)
+			sum+=Pow(annu.response(x[k])-y[k],2);
 		return sum/x.Length;
-	};
+		};
 
 	/* Use minimisation routine */
 	if(method == "qnewton") {
-		var (ptrained, operations) = minimisation.qnewton(Cp, this.p, precision);
+		var (ptrained, operations) = minimisation.qnewton(mismatch, this.p, precision);
 		this.p = ptrained;
 		this.counts = operations;
 		}
 	if(method == "simplex") {
 		if(step == null) { Error.WriteLine("No step size given. Returning..."); return; }
-		var (ptrained, operations) = minimisation.simplex(Cp, this.p, precision, step);
+		var (ptrained, operations) = minimisation.simplex(mismatch, this.p, precision, step);
 		this.p = ptrained;
 		this.counts = operations;
 	}
