@@ -1,10 +1,14 @@
 .PHONY : 
 all : Out.txt higgsfit.svg
 
+.PHONY : 
+open : 
+	xdg-open higgsfit.svg
+
 higgsfit.svg : higgs.gpi
 	gnuplot $^
 
-Out.txt : main.exe bwfit.txt
+Out.txt bwfit.txt simplexfit.txt: main.exe
 	mono main.exe < Higgs.txt > Out.txt
 
 main.exe : main.cs matrix.dll

@@ -16,7 +16,7 @@ class main {
 	static void Main() {
 		partA();
 		partB();
-		//partC();
+		partC();
 	}
 	static void startres(vector s, vector r, int c) {	
 		WriteLine($"Start value:		({s[0]}, {s[1]})");
@@ -122,27 +122,31 @@ class main {
 		outfit.Close();
 		WriteLine("A plot of the fit and data is in file: higgsfit.svg");
 		
-		vector v1 = new vector(122, 0.5, 5);
-	
-		(res, count) = minimisation.simplex(D, v1, 1e-3, step:0.5);
-		WriteLine("----------------- PART C -----------------");
-		WriteLine($"Parameters:	m = {res[0]} GeV");
-		WriteLine($"		Γ = {res[1]} ??");
-		WriteLine($"		A = {res[2]} ??");
-		WriteLine($"with 		{count} tries.");
-
-
 	}
 
 	static void partC() {
+		WriteLine("----------------------------------- Part C ---------------------");
+		WriteLine("In my minimisation script I have implemented the downhill simplex minimisation routine.");
+		WriteLine("The following are the results of the simplex starting with m = 122, Γ = 0.5 and A = 5. ");
+		WriteLine("Additionally were the sizegoal 1e-4 and the stepsize 0.2.");
 		vector v1 = new vector(122, 0.5, 5);
 	
-		(res, count) = minimisation.simplex(D, v1, 1e-3, step:0.5);
-		WriteLine("----------------- PART C -----------------");
+		(res, count) = minimisation.simplex(D, v1, 1e-4, step:0.2);
 		WriteLine($"Parameters:	m = {res[0]} GeV");
 		WriteLine($"		Γ = {res[1]} ??");
 		WriteLine($"		A = {res[2]} ??");
 		WriteLine($"with 		{count} tries.");
+
+		WriteLine("The plot of this fit can be seen in higgsfit.svg alongside the Q-Newton method.");
+		WriteLine("The simplex is noticeably smoother, and running the routine \n also feels more robust, although more time consuming. ");
+
+		var outfit = new StreamWriter("simplexfit.txt");
+		for(double i = 101; i < (double) 160; i += 0.1) {
+			vector input = new vector(i, res[0], res[1], res[2]);
+			outfit.WriteLine($"{i}	{f(input)}");
+		}	
+
+		outfit.Close();
 
 
 	}

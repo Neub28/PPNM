@@ -34,6 +34,7 @@ public static class minimisation {
 	matrix B = new matrix(dim, dim);
 	B.setid();
 	
+	//Error.WriteLine("Quasi-Newton routine started..... ");
 	while(gradient(f, x).norm() > acc) {
 		counter ++;
 		vector grad = gradient(f, x);
@@ -65,6 +66,7 @@ public static class minimisation {
 		}
 
 	}
+	//Error.WriteLine("Quasi-Newton done.");
 	return (x, counter);	
 
 	}
@@ -74,94 +76,94 @@ public static class minimisation {
 
 	public static (vector, int) simplex
 	(Func<vector, double> f, vector init, double sizegoal, double step, double countlim = 100000) {
+	
 	int dim = init.size;
-	int npoints = dim + 1;
-	vector[] vecs = new vector[npoints];
-	double[] fs = new double[npoints];
+	int npoints = init.size+1;
+	vector[] ps = new vector[npoints]; 
+	double[] fps = new double[npoints];
 	
-	/* Last element is initial vector. All other elements are steps in all possible directions. */
-	vecs[dim] = init.copy();
+	ps[dim] = init.copy();
+	fps[dim] = f(ps[dim]);
 	
+	/* Use step to create the other vectors of the simplex */
 	for(int i = 0; i < dim; i++) {
 		init[i] += step;
-		vecs[i] = init.copy();
-		fs[i] = f(vecs[i]);
+		ps[i] = init.copy();
+		fps[i] = f(ps[i]);
 		init[i] -= step;
-
 	}
-	
+	/* Variables storing index of highest and lowest points. */
 	int hi = 0;
-	int lo = 0; 
-	int counts = 0;
+	int lo = 0;
+	/* Variables for operations. */
+	vector pre;
+	vector pex;
+	vector pco;
 
-	/* REPEAT  */
+	int count = 0;
+	
+	Error.WriteLine("Simplex is now rolling 'downhill'.... ");
 	do {
-		counts ++;
-		hi = 0; lo = 0;
-		double fhi = fs[hi];
-		double flo = fs[lo];
+		hi = 0;
+		lo = 0;
+		count ++;
 
-		if(counts > countlim) {
-			Error.WriteLine("Number of operations exceeded.");
-		}
-		/* Find highest-, lowest- and centroid-point(s) */
+		/* Find highest and lowest points */
 		for(int i = 1; i < npoints; i++) {
-			if(fs[i] > fhi ) fhi = fs[i]; hi = i;
-			if(fs[i] < flo ) flo = fs[i]; lo = i;
-		}
+			if(f(ps[i]) > f(ps[hi])) { hi = i; }
+			if(f(ps[i]) < f(ps[lo])) { lo = i; }
+			}
+		/* Calculate centroid point  */
 		vector pce = new vector(dim);
 		for(int i = 0; i < npoints; i++) {
-			if(i != hi) pce += vecs[i];
+			if(i!=hi) { pce += ps[i];  }
 		}
 		pce /= dim;
-
 		
-		foreach(vector v in vecs) {
-			Error.WriteLine($"{v[0]}  {v[1]}  {v[2]}");
-		}
-
-		/* Try reflection */	
-		vector pre = pce+pce-vecs[hi];
-
-		if(f(pre) < flo) {
-			/* Try expansion */
-			vector pex = pce+2*(pce-vecs[hi]);
-			if(f(pex) < f(pre)) {
+		/* Reflection  */
+		pre = 2*pce - ps[hi];
+		if( f(pre) < f(ps[lo]) ) {
+			/* Expansion */
+			pex = 3*pce - ps[hi];
+			if( f(pex) < f(pre)  ) {
 				/* Accept expansion */
-				vecs[hi] = pex;
-			}
+				ps[hi] = pex;
+				}
 			else {
 				/* Accept reflection */
-				vecs[hi] = pre;
+				ps[hi] = pre;
+				}
 			}
-		}
 		else {
-			if(f(pre) < fhi) {
+			if( f(pre) < f(ps[hi])  ) {
 				/* Accept reflection */
-				vecs[hi] = pre;
-			}
+				ps[hi] = pre;
+				}
 			else {
-				/* Try contraction */
-				vector pco = pce+0.5*(vecs[hi]-pce);
-				if(f(pco) < fhi) {
-					/* Accept contraction */
-					vecs[hi] = pco;
-				}
+				/* Contraction  */
+				pco = (pce+ps[hi])/2;
+				if( f(pco) < f(ps[hi])  ) {
+					/* Accept contraction  */
+					ps[hi] = pco;
+					}
 				else {
-					/* Do reduction */
+					/* Reduction */
 					for(int i = 0; i < npoints; i++) {
-						if(i != lo) {
-							vecs[i] = 0.5*(vecs[i]+vecs[lo]);
+						if(i!=lo) {
+							ps[i] = (ps[i]+ps[lo])/2;
+							fps[i] = f(ps[i]);
+							}
 						}
+
 					}
-					}
+
 				}
 			}
-	} while(simplex_size(vecs) > sizegoal && counts < countlim);
-	
-	Error.WriteLine($"size {simplex_size(vecs)} \t sizegoal {sizegoal}");
-
-	return (vecs[lo], counts);
+	//Error.WriteLine($"size: {simplex_size(ps)} and sizegoal: {sizegoal}");
+	} while(simplex_size(ps) > sizegoal && count < countlim);
+	if(count == countlim) Error.WriteLine("Numbers of counts exceeded.");
+	Error.WriteLine("Downhill-simplex done.");
+	return (ps[lo], count);
 	}
 	
 

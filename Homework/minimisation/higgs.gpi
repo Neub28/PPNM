@@ -11,5 +11,6 @@ set tics out
 set xzeroaxis
 set yzeroaxis
 
-plot "bwfit.txt" with lines linewidth 2 dashtype 1 lc rgb "black" title "Fit", \
-"Higgs.txt" using 1:2:3 with errorbars pointtype 7 pointsize 0.7 lc rgb "dark-blue" title "Data"
+plot "bwfit.txt" with lines linewidth 2 dashtype 2 lc rgb "green" title "Q-Newton", \
+"simplexfit.txt" with lines linewidth 2 dashtype 2 lc rgb "red" title "Simplex", \
+"Higgs.txt" using 1:2:3 with errorbars pointtype 7 pointsize 0.5 lc rgb "dark-blue" title "Data"
