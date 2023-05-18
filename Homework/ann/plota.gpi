@@ -14,5 +14,7 @@ pty = 7
 
 f(x) = cos(5*x-1)*exp(-x*x)
 
-plot "annvalues.txt" with points pointsize psi pointtype pty lc rgb "red" title "ANN", \
+plot "annvalues.txt" with points pointsize psi pointtype pty lc rgb "red" title "Quasi-Newton", \
+"simvalues.txt" with points pointsize psi pointtype pty lc rgb "blue" title "Simplex", \
+"trainingpoints.txt" with points pointsize psi pointtype 6 lc rgb "purple" title "Training points", \
 f(x) with lines dashtype 1 linewidth 2 lc rgb "black" title "Analytical"

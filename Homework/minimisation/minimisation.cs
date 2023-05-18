@@ -29,6 +29,7 @@ public static class minimisation {
 						)
 	{
 	int counter = 0;
+	int second_count = 0;
 	int dim = start.size;
 	vector x = start.copy();
 	matrix B = new matrix(dim, dim);
@@ -61,6 +62,7 @@ public static class minimisation {
 				B.setid();
 				break;
 			}
+			second_count ++;
 
 
 		}
