@@ -7,9 +7,13 @@ class main {
 	public static double[] x;
 	public static double[] y;
 	public static Func<double, double> f;
+	public static Func<double, double> fD;
+	public static Func<double, double> fDD;
+	public static Func<double, double> fAD;
 
 	static void Main() {
 		partA();
+		partB();
 
 	}
 
@@ -20,7 +24,7 @@ class main {
 		f = delegate(double x) {
 			return Cos(5*x-1)*Exp(-x*x);
 		};
-		int size = 20;
+		int size = 35;
 		x = new double[size];
 		y = new double[size];
 		double a = -1;
@@ -40,7 +44,7 @@ class main {
 		Error.WriteLine("Quasi-Newton training...");
 		annQN.train(x,y, method:"qnewton", precision:1e-3);
 		Error.WriteLine("Simplex training...");
-		annSI.train(x,y, method:"simplex", precision:1e-6, step:0.7);
+		annSI.train(x,y, method:"simplex", precision:1e-3, step:0.7);
 		
 		WriteLine("\nFinal parameters: Quasi-Newton");
 		for(int i = 0; i < annQN.p.size; i++) {
@@ -66,30 +70,54 @@ class main {
 		}
 		outQN.Close();
 		outSI.Close();
+		
+	}
 
-		//printVals(annQN, "annvalues.txt");
-		//printVals(annSI, "simvalues.txt");
+	static void partB() {
+		WriteLine("-------------- PART B ------------------");
+		WriteLine("I have modified the artifical neural network to now be able to evalute derivatives and antiderivatives.");
+		WriteLine("The plot showing this is in plotB.svg.");
+		WriteLine("The neural network can mimic the functions, but struggles noticeably to get the amplitude right");
+		WriteLine("though the shape of the calculated functions are quite accurate to the analytical.");
+
+		f = x => Cos(x);
+		fD = x => -Sin(x);
+		fDD = x => -Cos(x);
+		fAD = x => Sin(x);
+
+		int size = 60;
+		x = new double[size];
+		y = new double[size];
+		double a = -PI;
+		double b = PI;
+		
+		var outpoints = new StreamWriter("trainingpointsB.txt");
+		for(int i = 0; i < size; i++) {
+			x[i] = a + (b-a)*i/(size-1);
+			y[i] = f(x[i]);
+			outpoints.WriteLine($"{x[i]}	{y[i]}");
+		}
+		outpoints.Close();
+
+		ann annB = new ann(3);
+		annB.train(x,y, method:"simplex", precision:1e-3, step:0.7);
+		
+		var outderivs = new StreamWriter("derivpoints.txt");
+		var outannderivs = new StreamWriter("annderivs.txt");
+		for(int i = 0; i < 100; i++) {
+			double xc = a+(b-a)*i/(100-1);
+			double y0 = f(xc);
+			double yD = fD(xc);
+			double yDD = fDD(xc);
+			double yAD = fAD(xc);
+			outderivs.WriteLine($"{xc}	{y0}	{yD}	{yDD}	{yAD-fAD(0)}");
+			outannderivs.WriteLine($"{xc}	{annB.response(xc)}	{annB.derivativeResponse(xc)}	{annB.dderivativeResponse(xc)}	{annB.antiderivativeResponse(xc)-annB.antiderivativeResponse(0)}");
+		}
+		outderivs.Close();
+		outannderivs.Close();
 
 	}
-	static void findParams() {
-		//ann AI = new ann(3);
-		//WriteLine($"Starting parameters for ANN: ");
-		//for(int i = 0; i < AI.p.size; i++) {
-		//	Write($"{AI.p[i]}\t");
-		//	if((i+1)%3 == 0) WriteLine("");
-		//}
-		//	
-		//makexy();
-		//AI.train(x, y);
-		//
-		//printVals(AI);
-		//WriteLine("\nFinal parameters:");
-		//for(int i = 0; i < AI.p.size; i++) {
-		//	Write($"{AI.p[i]}   ");
-		//	if((i+1)%3 == 0) WriteLine("");
-		//}
 
-	}
 	static void printVals(ann A, string s) {
 		var annout = new StreamWriter(s);
 		for(int i = 0; i < x.Length; i++) {

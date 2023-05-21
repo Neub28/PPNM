@@ -1,0 +1,24 @@
+set terminal svg font "Times New Roman, 20"
+set terminal svg background "white"
+set output "plotB.svg"
+
+set multiplot layout 2,2 title "Neural-network comparsion to analytical derivative/antiderivative" font "Times New Roman, 18"
+set xzeroaxis
+set yzeroaxis
+set grid
+
+plot "trainingpointsB.txt" with points pointsize 0.7 pointtype 7 lc rgb "red" title "Points", \
+"annderivs.txt" using 1:2 with lines dashtype 2 linewidth 2 lc rgb "blue" title "Simplex: cos(x)", \
+cos(x) with lines dashtype 1 linewidth 1 lc rgb "black" title "cos(x)"
+
+plot "annderivs.txt" using 1:3 with lines dashtype 2 linewidth 2 lc rgb "blue" title "Simplex: -sin(x)", \
+-sin(x) with lines dashtype 1 linewidth 1 lc rgb "black" title "-sin(x)"
+
+plot "annderivs.txt" using 1:4 with lines dashtype 2 linewidth 2 lc rgb "blue" title "Simplex: -cos(x)", \
+-cos(x) with lines dashtype 1 linewidth 1 lc rgb "black" title "-cos(x)"
+
+plot "annderivs.txt" using 1:5 with lines dashtype 2 linewidth 2 lc rgb "blue" title "Simplex: ∫sin(x')dx', 0 -> x", \
+sin(x) with lines dashtype 1 linewidth 1 lc rgb "black" title "∫sin(x')dx', 0 -> x"
+
+
+

@@ -3,17 +3,22 @@ I have implemented an artifical neural network,	which can use either Quasi-Newto
 I will test both of these implementations.
 
 Final parameters: Quasi-Newton
--1.73005333946236   -0.0925192704150136   1.0871761971004   
-1.03400775256729   0.444430065630823   0.551306355502376   
-1.08364990257695   2.55633849930181   1.57804959872756   
+-1.73051917107449   -0.0919145659207213   1.08397659400739   
+1.03596654304923   0.448403459734529   0.555485981100895   
+1.12515761677897   2.58390473678208   1.61713043214375   
 
 Final parameters: Simplex
--1.28634334574757   -0.0916356280401887   1.09749118767287   
-0.961503658527764   0.502115886393471   0.82454389909518   
-2.2760172035892   3.70585792857955   2.711085334384   
+-2.94157470981443   -0.081564090390674   1.13822812947013   
+2.56049852772521   0.460567513378977   0.727314368598159   
+1.22332225508418   2.86527135969879   2.34311593360451   
 The plots of the trained networks are in plotA.svg.
 The simplex method seems to be much more robust and stable than the qnewton.
 Whilst the qnewton method is very sensitive to precision the simplex simply 
 always returns something reasonable.
 Both networks are however very nice compared to the analytical function, and seems 
  to be in fine agreement with the parameters.
+-------------- PART B ------------------
+I have modified the artifical neural network to now be able to evalute derivatives and antiderivatives.
+The plot showing this is in plotB.svg.
+The neural network can mimic the functions, but struggles noticeably to get the amplitude right
+though the shape of the calculated functions are quite accurate to the analytical.

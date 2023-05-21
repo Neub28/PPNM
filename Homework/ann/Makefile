@@ -1,14 +1,18 @@
 .PHONY : 
-all : Out.txt plotA.svg
+all : plotA.svg plotB.svg Out.txt
 
 .PHONY :
 open : 
 	xdg-open plotA.svg
+	xdg-open plotB.svg
 
-plotA.svg : plota.gpi
+plotA.svg : plota.gpi annvalues.txt simvalues.txt trainingpoints.txt
 	gnuplot $<
 
-Out.txt annvalues.txt simvalues.txt trainingpoints.txt: main.exe
+plotB.svg : plotb.gpi trainingpointsB.txt annderivs.txt derivpoints.txt
+	gnuplot $<
+
+Out.txt : main.exe
 	mono main.exe > Out.txt
 
 main.exe : main.cs nummethods.dll
