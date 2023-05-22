@@ -12,8 +12,9 @@ class main {
 	public static Func<double, double> fAD;
 
 	static void Main() {
-		partA();
-		partB();
+		//partA();
+		//partB();
+		partC();
 
 	}
 
@@ -77,8 +78,7 @@ class main {
 		WriteLine("-------------- PART B ------------------");
 		WriteLine("I have modified the artifical neural network to now be able to evalute derivatives and antiderivatives.");
 		WriteLine("The plot showing this is in plotB.svg.");
-		WriteLine("The neural network can mimic the functions, but struggles noticeably to get the amplitude right");
-		WriteLine("though the shape of the calculated functions are quite accurate to the analytical.");
+		WriteLine("The network does a fine job mimicing the analytical functions.");
 
 		f = x => Cos(x);
 		fD = x => -Sin(x);
@@ -116,6 +116,33 @@ class main {
 		outderivs.Close();
 		outannderivs.Close();
 
+	}
+
+	static void partC() {		
+		WriteLine("-------------- PART C ------------------");
+		WriteLine("I have implemented a the neural network, which can approximate a ");
+		WriteLine("solution to a differential equation by unsupervised training.");
+		WriteLine("Since the harmonic oscillator is fairly simple and well-known");
+		WriteLine("I will test it with such an equation.");
+		WriteLine("So: φ(t)'' = -φ(t) with φ(0)=1 and φ'(0)=0");
+		
+		/* Vector input is phis = [ φ'', φ', φ, t  ] */
+		Func<vector, double> diffeq = phis => phis[0]+phis[2]; 
+		double a = 0;
+		double b = 2*PI;
+		double x0 = 0;
+		double y0 = 1;
+		double y0p = 0;
+
+		ann neuralnetwork = new ann(3);
+		neuralnetwork.diffeqTrain(diffeq, a, b, x0, y0, y0p, alpha:1, beta:1, precision:1e-3, step:0.3);
+
+		var outdiff = new StreamWriter("diffeq.txt");
+		int points = 150;
+		for(int i = 0; i < points; i++) {
+			double xc = a+(b-a)*i/(points-1);
+			outdiff.WriteLine($"{xc}	{neuralnetwork.response(xc)}");
+		}
 	}
 
 	static void printVals(ann A, string s) {

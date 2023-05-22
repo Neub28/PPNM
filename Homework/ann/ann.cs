@@ -11,6 +11,7 @@ public class ann {
 	public Func<double, double> dderiv = x => 4*Exp(-Pow(x,2))*Pow(x,3)-6*Exp(-Pow(x,2))*x;
 	public Func<double, double> antideriv = x => -0.5*Exp(-Pow(x,2));
 	public vector p; 
+	public Random random = new Random();
 	
 	/* Methods for setting values in parameter vector p. */
 	public void seta(int i, double z) { p[i] = z; }
@@ -35,7 +36,8 @@ public class ann {
 	public double derivativeResponse(double x) {
 		double sum = 0;
 		for(int i = 0; i < n; i++) {
-			sum += w(i)*deriv((x-a(i))/b(i));
+			/* x' -> x-a/b gives factor 1/b*/
+			sum += w(i)/b(i)*deriv((x-a(i))/b(i));
 		}
 		return sum;
 
@@ -44,7 +46,8 @@ public class ann {
 	public double dderivativeResponse(double x) {
 		double sum = 0; 
 		for(int i = 0; i < n; i++) {
-			sum += w(i)*dderiv((x-a(i))/b(i));
+			/* x' -> x-a/b gives factor 1/b²*/
+			sum += w(i)/Pow(b(i),2)*dderiv((x-a(i))/b(i));
 		}
 		return sum; 
 
@@ -53,7 +56,8 @@ public class ann {
 	public double antiderivativeResponse(double x) {
 		double sum = 0; 
 		for(int i = 0; i < n; i++) {
-			sum += w(i)*antideriv((x-a(i))/b(i));
+			/* Substitution from x' -> x-a/b gives factor b */
+			sum += w(i)*b(i)*antideriv((x-a(i))/b(i));
 		}
 		return sum;
 	}
@@ -83,7 +87,7 @@ public class ann {
 		setb(i,1);
 		seta(i,x[0]+(x[x.Length-1]-x[0])*i/(n-1)); 
 	}
-	Func<vector,double> mismatch = (u) => {
+	Func<vector,double> cost = (u) => {
 		ann annu = new ann(u);
 		double sum=0;
 		for(int k=0;k<x.Length;k++)
@@ -93,16 +97,59 @@ public class ann {
 
 	/* Use minimisation routine */
 	if(method == "qnewton") {
-		var (ptrained, operations) = minimisation.qnewton(mismatch, this.p, precision);
+		var (ptrained, operations) = minimisation.qnewton(cost, this.p, precision);
 		this.p = ptrained;
 		this.counts = operations;
 		}
 	if(method == "simplex") {
-		var (ptrained, operations) = minimisation.simplex(mismatch, this.p, precision, step);
+		var (ptrained, operations) = minimisation.simplex(cost, this.p, precision, step);
 		this.p = ptrained;
 		this.counts = operations;
 	}
 	Error.WriteLine($"Training succesfull with: {this.counts} tries.");
+	}
+	
+	/* Method does not define cost function for user, but only takes as argument. */
+	public void diffeqTrain(Func<vector, double> diffeq, double a, double b, 
+	double x0, double y0, double y0p, double alpha = 1, double beta = 1, double precision = 1e-3, double step = 0.5) {
+	
+	/* Used for initial guess. a's should be evenly spaced across range */
+	for(int i = 0; i < n; i++) {
+		setw(i,1);
+		setb(i,1);
+		seta(i,a+(b-a)*i/(n-1)); 
+	}
+	/* Cost function */
+	Func<vector, double> cost = ps => {
+		
+		ann annu = new ann(ps);
+		
+		/* Define integral function nee½ded by numerical integration routine. */
+		Func<double, double> integral = x => {
+			/* input = [ φ'', φ', φ, t ] */
+			vector input = new vector(4);
+			input[0] = annu.dderivativeResponse(x);
+			input[1] = annu.derivativeResponse(x);
+			input[2] = annu.response(x);
+			input[3] = x;
+			return Pow(diffeq(input),2);
+		};
+		double finalsum = 0; 
+		finalsum += integrator.integrate(integral, a, b, 1e-4, 1e-4);
+		finalsum += alpha*Pow(annu.response(x0)-y0, 2);
+		finalsum += beta*Pow(annu.dderivativeResponse(x0)-y0p, 2);
+		
+		return finalsum;
+	};
+
+	Error.WriteLine("Unsupervised training.....");
+	
+	var (ptrained, operations) = minimisation.simplex(cost, this.p, precision, step);
+	this.p = ptrained;
+	this.counts = operations;
+
+	Error.WriteLine($"Unsupervised training succesfull with: {this.counts} tries.");
+	
 	}
 
 
