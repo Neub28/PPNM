@@ -11,16 +11,15 @@ public class ann {
 	public Func<double, double> dderiv = x => 4*Exp(-Pow(x,2))*Pow(x,3)-6*Exp(-Pow(x,2))*x;
 	public Func<double, double> antideriv = x => -0.5*Exp(-Pow(x,2));
 	public vector p; 
-	public Random random = new Random();
 	
 	/* Methods for setting values in parameter vector p. */
-	public void seta(int i, double z) { p[i] = z; }
-	public void setb(int i, double z) { p[i+n] = z; }
-	public void setw(int i, double z) { p[i+2*n] = z; }
+	public void seta(int i, double z) { this.p[i] = z; }
+	public void setb(int i, double z) { this.p[i+n] = z; }
+	public void setw(int i, double z) { this.p[i+2*n] = z; }
 	/* Methods for getting values in parameter vector input p. */
-	public double a(int i) { return p[i]; }
-	public double b(int i) { return p[i+n]; }
-	public double w(int i) { return p[i+2*n]; }
+	public double a(int i) { return this.p[i]; }
+	public double b(int i) { return this.p[i+n]; }
+	public double w(int i) { return this.p[i+2*n]; }
 	
 	/* Constructor  */
 	public ann(int n) {
@@ -120,7 +119,7 @@ public class ann {
 		seta(i,a+(b-a)*i/(n-1)); 
 	}
 	/* Cost function */
-	/*Func<vector, double> cost = ps => {
+	Func<vector, double> cost = ps => {
 		
 		ann annu = new ann(ps);
 		
@@ -132,70 +131,17 @@ public class ann {
 			input[1] = annu.derivativeResponse(x);
 			input[2] = annu.response(x);
 			input[3] = x;
-			return Pow(diffeq(input),2);
+			return diffeq(input)*diffeq(input);
 		};
+		
 		double finalsum = 0; 
-		finalsum += integrator.integrate(integral, a, b, 1e-4, 1e-4);
+		finalsum += integrator.integrate(integral, a, b, 1e-3, 1e-3);
 		finalsum += alpha*Pow(annu.response(x0)-y0, 2);
-		finalsum += beta*Pow(annu.dderivativeResponse(x0)-y0p, 2);
+		finalsum += beta*Pow(annu.derivativeResponse(x0)-y0p, 2);
 		
 		return finalsum;
-	}; */
-
-	Func<vector, double> cost = ps => {
-		double ai;
-		double bi;
-		double wi;
-		Func<double, double> Fp = x => {
-			double sum = 0;
-			for(int i = 0; i < n; i++) {
-				ai = ps[i];
-				bi = ps[n+i];
-				wi = ps[2*n+i];
-				sum += wi * f( (x-ai)/bi );
-			}
-			return sum;
-		};
-
-		Func<double, double> Fpp = x => {
-			double sum2 = 0;
-			for(int i = 0; i < n; i++) {
-				ai = ps[i];
-				bi = ps[n+i];
-				wi = ps[2*n+i];
-				sum2 += wi/bi * deriv( (x-ai)/bi );
-			}
-			return sum2;
-		};
-
-		Func<double, double> Fpp2 = x => {
-			double sum3 = 0;
-			for(int i = 0; i < n; i++) {
-				ai = ps[i];
-				bi = ps[n+i];
-				wi = ps[2*n+i];
-				sum3 += wi/(bi*bi)* dderiv( (x-ai)/bi );
-			}
-			return sum3;
-		};
-
-		Func<double, double> Fint = x => {
-			vector inp = new vector(4);
-			inp[0] = Fpp2(x);
-			inp[1] = Fpp(x);
-			inp[2] = Fp(x);
-			inp[3] = x;
-			return diffeq(inp)*diffeq(inp);
-		};
-
-		double finalsum = 0;
-		finalsum += integrator.integrate(Fint, a, b, 1e-4, 1e-4);
-		finalsum += alpha*(Fp(x0)-y0)*(Fp(x0)-y0);
-		finalsum += beta*(Fpp(x0)-y0p)*(Fpp(x0)-y0p);
-		return finalsum;
-
 	};
-
+	
 	Error.WriteLine("Unsupervised training.....");
 	
 	var (ptrained, operations) = minimisation.simplex(cost, this.p, precision, step);

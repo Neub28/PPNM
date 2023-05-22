@@ -2,11 +2,12 @@ set terminal svg font "Times New Roman, 18"
 set terminal svg background "white"
 set output "plotC.svg"
 
-set title "Aritifical neural network used to solve: φ''(t) = -φ(t)" font "Times New Roman, 18"
+set title "Neural network: φ(0) = 1, φ'(0) = 0 for φ''(t) = -φ(t)" font "Times New Roman, 18"
 
 set grid
 set xzeroaxis
 set yzeroaxis
+set key bottom right
 
-plot "diffeq.txt" using 1:2 with points pointsize 0.7 pointtype 7 lc rgb "red" title "Simplex", \
+plot "diffeq.txt" using 1:2 with lines dashtype 2 linewidth 2 lc rgb "red" title "Simplex", \
 cos(x) with lines dashtype 1 linewidth 1 lc rgb "black" title "Analytical: cos(t)"

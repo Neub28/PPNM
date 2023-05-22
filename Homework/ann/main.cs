@@ -12,8 +12,9 @@ class main {
 	public static Func<double, double> fAD;
 
 	static void Main() {
-		//partA();
-		//partB();
+		WriteLine("Disclaimer: Because I use the simplex in this homework running the main script takes quite a while....");
+		partA();
+		partB();
 		partC();
 
 	}
@@ -125,6 +126,7 @@ class main {
 		WriteLine("Since the harmonic oscillator is fairly simple and well-known");
 		WriteLine("I will test it with such an equation.");
 		WriteLine("So: φ(t)'' = -φ(t) with φ(0)=1 and φ'(0)=0");
+		WriteLine("By using the simplex the convergence is very slow, therefore the \nprecision is chosen fairly small. The solution is though still very nice, as seen in plotC.svg.");
 		
 		/* Vector input is phis = [ φ'', φ', φ, t  ] */
 		Func<vector, double> diffeq = phis => phis[0]+phis[2]; 
@@ -134,14 +136,14 @@ class main {
 		double y0 = 1;
 		double y0p = 0;
 
-		ann neuralnetwork = new ann(3);
-		neuralnetwork.diffeqTrain(diffeq, a, b, x0, y0, y0p, alpha:1, beta:1, precision:1e-3, step:0.5);
+		ann anncos = new ann(3);
+		anncos.diffeqTrain(diffeq, a, b, x0, y0, y0p, alpha:1, beta:1, precision:1e-3, step:0.5);
 
 		var outdiff = new StreamWriter("diffeq.txt");
-		int points = 150;
+		int points = 100;
 		for(int i = 0; i < points; i++) {
 			double xc = a+(b-a)*i/(points-1);
-			outdiff.WriteLine($"{xc}	{neuralnetwork.response(xc)}");
+			outdiff.WriteLine($"{xc}	{anncos.response(xc)}");
 		}
 	}
 

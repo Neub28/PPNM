@@ -1,6 +1,32 @@
+Disclaimer: Because I use the simplex in this homework running the main script takes quite a while....
+-------------- PART A ------------------
+I have implemented an artifical neural network,	which can use either Quasi-Newton- or simplex-minimisation.
+I will test both of these implementations.
+
+Final parameters: Quasi-Newton
+-1.73051917107449   -0.0919145659207213   1.08397659400739   
+1.03596654304923   0.448403459734529   0.555485981100895   
+1.12515761677897   2.58390473678208   1.61713043214375   
+
+Final parameters: Simplex
+-2.94157470981443   -0.081564090390674   1.13822812947013   
+2.56049852772521   0.460567513378977   0.727314368598159   
+1.22332225508418   2.86527135969879   2.34311593360451   
+The plots of the trained networks are in plotA.svg.
+The simplex method seems to be much more robust and stable than the qnewton.
+Whilst the qnewton method is very sensitive to precision the simplex simply 
+always returns something reasonable.
+Both networks are however very nice compared to the analytical function, and seems 
+ to be in fine agreement with the parameters.
+-------------- PART B ------------------
+I have modified the artifical neural network to now be able to evalute derivatives and antiderivatives.
+The plot showing this is in plotB.svg.
+The network does a fine job mimicing the analytical functions.
 -------------- PART C ------------------
 I have implemented a the neural network, which can approximate a 
 solution to a differential equation by unsupervised training.
 Since the harmonic oscillator is fairly simple and well-known
 I will test it with such an equation.
 So: φ(t)'' = -φ(t) with φ(0)=1 and φ'(0)=0
+By using the simplex the convergence is very slow, therefore the 
+precision is chosen fairly small. The solution is though still very nice, as seen in plotC.svg.

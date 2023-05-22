@@ -109,6 +109,9 @@ public static class minimisation {
 		hi = 0;
 		lo = 0;
 		count ++;
+		if(count != 0 && count % 10000 == 0) {
+			Error.WriteLine($"{count} tries...");
+		}
 
 		/* Find highest and lowest points */
 		for(int i = 1; i < npoints; i++) {
