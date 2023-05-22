@@ -135,7 +135,7 @@ class main {
 		double y0p = 0;
 
 		ann neuralnetwork = new ann(3);
-		neuralnetwork.diffeqTrain(diffeq, a, b, x0, y0, y0p, alpha:1, beta:1, precision:1e-3, step:0.3);
+		neuralnetwork.diffeqTrain(diffeq, a, b, x0, y0, y0p, alpha:1, beta:1, precision:1e-3, step:0.5);
 
 		var outdiff = new StreamWriter("diffeq.txt");
 		int points = 150;

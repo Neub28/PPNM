@@ -120,13 +120,13 @@ public class ann {
 		seta(i,a+(b-a)*i/(n-1)); 
 	}
 	/* Cost function */
-	Func<vector, double> cost = ps => {
+	/*Func<vector, double> cost = ps => {
 		
 		ann annu = new ann(ps);
 		
-		/* Define integral function nee½ded by numerical integration routine. */
+		// Define integral function needed by numerical integration routine. 
 		Func<double, double> integral = x => {
-			/* input = [ φ'', φ', φ, t ] */
+			// input = [ φ'', φ', φ, t ]
 			vector input = new vector(4);
 			input[0] = annu.dderivativeResponse(x);
 			input[1] = annu.derivativeResponse(x);
@@ -140,6 +140,60 @@ public class ann {
 		finalsum += beta*Pow(annu.dderivativeResponse(x0)-y0p, 2);
 		
 		return finalsum;
+	}; */
+
+	Func<vector, double> cost = ps => {
+		double ai;
+		double bi;
+		double wi;
+		Func<double, double> Fp = x => {
+			double sum = 0;
+			for(int i = 0; i < n; i++) {
+				ai = ps[i];
+				bi = ps[n+i];
+				wi = ps[2*n+i];
+				sum += wi * f( (x-ai)/bi );
+			}
+			return sum;
+		};
+
+		Func<double, double> Fpp = x => {
+			double sum2 = 0;
+			for(int i = 0; i < n; i++) {
+				ai = ps[i];
+				bi = ps[n+i];
+				wi = ps[2*n+i];
+				sum2 += wi/bi * deriv( (x-ai)/bi );
+			}
+			return sum2;
+		};
+
+		Func<double, double> Fpp2 = x => {
+			double sum3 = 0;
+			for(int i = 0; i < n; i++) {
+				ai = ps[i];
+				bi = ps[n+i];
+				wi = ps[2*n+i];
+				sum3 += wi/(bi*bi)* dderiv( (x-ai)/bi );
+			}
+			return sum3;
+		};
+
+		Func<double, double> Fint = x => {
+			vector inp = new vector(4);
+			inp[0] = Fpp2(x);
+			inp[1] = Fpp(x);
+			inp[2] = Fp(x);
+			inp[3] = x;
+			return diffeq(inp)*diffeq(inp);
+		};
+
+		double finalsum = 0;
+		finalsum += integrator.integrate(Fint, a, b, 1e-4, 1e-4);
+		finalsum += alpha*(Fp(x0)-y0)*(Fp(x0)-y0);
+		finalsum += beta*(Fpp(x0)-y0p)*(Fpp(x0)-y0p);
+		return finalsum;
+
 	};
 
 	Error.WriteLine("Unsupervised training.....");
