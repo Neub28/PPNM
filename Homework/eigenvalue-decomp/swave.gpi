@@ -1,0 +1,24 @@
+set terminal svg
+set terminal svg background "white"
+set output "swavefunction.svg"
+set title "Hydrogen: s-wave function" font "Times New Roman, 19"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+set grid
+
+f(x) = 2*x*exp(-x)
+g(x) = -1/(2*sqrt(2))*x*(2-x)*exp(-x/2)
+
+set style line 1 lc rgb 'red' lt 2 lw 1 pt 20 pi -1 ps 0.7
+set style line 2 lc rgb 'blue' lt 2 lw 1 pt 20 pi -1 ps 0.7
+
+set ylabel "Ψ(r)" font "Times New Roman, 16"
+set xlabel "r" font "Times New Roman, 16"
+
+plot "swave1.txt" with linespoints ls 1 title "Calc: n=1", \
+f(x) dashtype 2 lw 2 lc rgb "black" title "Analy: n=1", \
+"swave2.txt" with linespoints ls 2 title "Calc: n=2", \
+g(x) dashtype 2 lw 2 lc rgb "black" title "Analy: n=2"
+
