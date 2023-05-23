@@ -9,10 +9,10 @@ open :
 	xdg-open convergence.svg
 	xdg-open swavefunction.svg
 
-convergence.svg : conv.gpi fixeddr.txt fixedrmax.txt
+convergence.svg : conv.gp fixeddr.txt fixedrmax.txt
 	gnuplot $<
 
-swavefunction.svg : swave.gpi swave1.txt swave2.txt
+swavefunction.svg : swave.gp swave1.txt swave2.txt
 	gnuplot $<
 
 Out.txt fixeddr.txt fixedrmax.txt swave1.txt swave2.txt : main.exe
