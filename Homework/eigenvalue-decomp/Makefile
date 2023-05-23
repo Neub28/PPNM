@@ -38,7 +38,9 @@ run_parallel :
 	done & 
 	for i in $(DR) ; do \
 		mono main.exe -rmax:5 -dr:$$i >> fixedrmax.txt ; \
-	done &
+	done
+	wait
+
 
 main.exe : main.cs matrix.dll
 	mcs main.cs -reference:matrix.dll -out:main.exe
