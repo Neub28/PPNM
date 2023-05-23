@@ -1,6 +1,7 @@
 using static System.Console;
 using static System.Math;
 using System;
+using System.Diagnostics;
 
 public class main {
 	public static Random rnd = new System.Random(7);
@@ -19,13 +20,14 @@ public class main {
 			int n = Int32.Parse(input[1])-1;
 			rmax = 10; dr = 0.2;
 			var res = drrmax(dr, rmax);
-			matrix H = res.Item2;
 			matrix V = res.Item3;
 			for(int i = 0; i < V.size1; i++) {
 				WriteLine($"{(i+1)*dr}	{V[i,n]*1/Sqrt(dr)}");
 				}
 			dr = 0; rmax = 0;
 			}
+			if(input[0] == "-partC") partC();
+			if(input[0] == "-partCtest") partCtest();
 		}
 
 		if(dr != 0 && rmax != 0) {
@@ -78,7 +80,25 @@ public class main {
 		WriteLine("In swavefunction.svg I have plotted the wavefunctions for lowest energies \nand different n's and compared them to the analytical results.");
 
 	}
+
+	static void partC() {
+		WriteLine("Part C: Scaling and optimization");
+		WriteLine("-----------------------------------------------------------");
+		WriteLine("First task was to do convergence calculations in parallel.");
+		WriteLine("In my Makefile I use a forloop over different values, therefore \nsimply using parallel batch processing '&' at end of each forloop solves this.");
+
+	}
 	
+	static void partCtest() {
+		int[] nlist = {10, 20, 50, 70, 100, 120, 150, 170, 200, 220, 250};
+		long times;
+		foreach(int n in nlist) {
+			times = diagtimes(n);
+			WriteLine($"{n}	{times}");
+		}
+
+	}
+
 	/* Method finds eigenvalue for certain choice of dr and rmax. */
 	static (double, matrix, matrix) drrmax(double dr, double rmax) {
 		
@@ -105,6 +125,27 @@ public class main {
 			if(H[i,i] < lowestE) lowestE = H[i,i];
 		}
 		return (lowestE, H, V);
+	}
+
+	static long diagtimes(int n) {
+		matrix J = new matrix(n,n);
+		matrix V = matrix.id(n);
+		for(int row = 0; row < n; row ++) {
+			for(int col = row; col < n; col ++) {
+				double val = rnd.NextDouble();
+				J[row, col] = val;
+				J[col, row] = val;
+			}
+			
+		}
+
+		Stopwatch watch = new Stopwatch();
+		
+		watch.Start();
+		jacobi_diag.cyclic(J,V);
+		watch.Stop();
+				
+		return watch.ElapsedMilliseconds;
 
 	}
 }
