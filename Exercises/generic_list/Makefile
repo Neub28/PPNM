@@ -6,3 +6,7 @@ main.exe : main.cs genlist.dll
 
 genlist.dll : genlist.cs
 	mcs genlist.cs -target:library -out:genlist.dll genlist.cs
+
+.PHONY : 
+clean : 
+	rm -f Out.txt *.exe *.dll

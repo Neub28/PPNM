@@ -15,7 +15,7 @@ public class vec {
 	}
 
 	/* Method printing the coordinates of the vector */
-	public void print(string s) {Write(s); WriteLine($"(x = {x}, y = {y}, z = {z}"); }
+	public void print(string s) {Write(s); WriteLine($"(x = {x}, y = {y}, z = {z})"); }
 	public void print(){this.print("");}
 
 	/* Addition operator for vectors */

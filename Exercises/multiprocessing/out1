@@ -1,5 +1,0 @@
-nterms = 500000000,  nthreads =  1
-master thread: now waiting for other threads...
-thread number 1 a=1 b = 500000001
-thread number 1 partial sum = 20.6073343222888
-total sum = 20.6073343222888

@@ -1,0 +1,7 @@
+I initialized two vectors:
+(x = 1, y = 2, z = 3)
+(x = 3, y = 2, z = 1)
+Cross product yields:
+(x = -4, y = 8, z = -4)
+Dot-product between crossed vector and first vector:
+0
