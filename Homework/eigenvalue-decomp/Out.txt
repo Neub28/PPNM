@@ -1,0 +1,23 @@
+Task A: Jacobi diagonlization with cyclic sweeps
+------------------------------------------------
+Is V^T A V = D ? True
+Is V D V^T = A ? True
+Is V^T V = 1 ? True
+Is V V^T = 1 ? True
+I am now testing the reliability of the optimized routine....
+Is V^T A V = D ? True
+Is V D V^T = A ? True
+Is V^T V = 1 ? True
+Is V V^T = 1 ? True
+Hydrogen atom, s-wave radial Schrödinger equation of a grid
+-----------------------------------------------------------
+A plot of the lowest eigenvalues for varying rmax and Δr is in convergence.svg
+From this plot we see that for around rmax = 10 and dr = 0.2 the 
+eigenvalue convergences to the exact solution.
+In swavefunction.svg I have plotted the wavefunctions for lowest energies 
+and different n's and compared them to the analytical results.
+Part C: Scaling and optimization
+-----------------------------------------------------------
+First task was to do convergence calculations in parallel.
+In my Makefile I use a forloop over different values, therefore 
+simply using parallel batch processing '&' at end of each forloop solves this.

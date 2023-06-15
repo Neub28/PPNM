@@ -1,17 +1,21 @@
 DR = 2 3 4 5 6 7 8 9 10
 RMAX = 2 3 4 5 6 7 8 9 10
 
-all : Out.txt swavefunction.svg convergence.svg diagtimes.txt
+all : Out.txt swavefunction.svg convergence.svg diagtimes.txt times.svg
 
 open : 
 	xdg-open convergence.svg
 	xdg-open swavefunction.svg
+	xdg-open times.svg
 
 swavefunction.svg : swave1.txt swave2.txt
 	gnuplot swave.gpi
 
 convergence.svg : fixeddr.txt fixedrmax.txt
 	gnuplot conv.gpi
+
+times.svg : times.gpi diagtimes.txt
+	gnuplot times.gpi
 
 Out.txt : main.exe
 	mono main.exe -partA >> Out.txt

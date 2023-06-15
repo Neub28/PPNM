@@ -1,0 +1,23 @@
+set terminal svg 
+set terminal svg background "white"
+set output "times.svg"
+set title "Computation times" font "Times New Roman, 19"
+set tics out
+set xzeroaxis
+set yzeroaxis
+set grid
+set key top left
+
+f(x) = a*x*x*x
+g(x) = b*x*x*x
+set fit quiet
+fit f(x) "diagtimes.txt" using 1:2 via a
+fit g(x) "diagtimes.txt" using 1:3 via b
+
+set xlabel "Dimension of matrix (n x n)" font "Times New Roman, 16"
+set ylabel "Time in milliseconds" font "Times New Roman, 16"
+
+plot "diagtimes.txt" using 1:2 with points pointtype 7 pointsize 0.7 lc rgb "red" title "Non-optimized", \
+"diagtimes.txt" using 1:3 with points pointtype 7 pointsize 0.7 lc rgb "blue" title "Optimized", \
+f(x) with lines dashtype 1 lw 2 lc rgb "light-red" title "Fit: O(n³)", \
+g(x) with lines dashtype 1 lw 2 lc rgb "light-blue" title "Fit: O(n³)"

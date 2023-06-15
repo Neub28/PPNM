@@ -58,7 +58,7 @@ public class jacobi_diag {
 		do {
 			changed = false;
 			/* All rows */
-			for(int p = 0; p < n-1; p++) { 
+			for(int p = 0; p < n; p++) { 
 			/* All elements in row except the p'th */
 			for(int q = p+1; q < n; q++) { 
 				/* Get the entries subject to change */
@@ -85,8 +85,8 @@ public class jacobi_diag {
 					double aiq;
 					A[p,q] = 0;
 					A[q,p] = 0;
-					new_app = A[p,p];
-					new_aqq = A[q,q];
+					A[p,p] = new_app;
+					A[q,q] = new_aqq;
 
 					for(int i = 0; i < p; i++) {
 						aip = A[i,p];
