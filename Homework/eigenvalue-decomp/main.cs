@@ -53,7 +53,10 @@ public class main {
 			
 		}
 		matrix V = matrix.id(size);
+		matrix A2 = A.copy();
+		matrix V2 = matrix.id(size);
 		matrix A_before = A.copy();
+
 		
 		/* Do Jacobi diagonalization of matrix A */
 		jacobi_diag.cyclic(A, V);
@@ -70,6 +73,23 @@ public class main {
 
 		matrix unity_2 = V*V.transpose();
 		WriteLine($"Is V V^T = 1 ? {unity_2.approx(matrix.id(size))}");
+
+		WriteLine("I am now testing the reliability of the optimized routine....");
+		Error.WriteLine("B");
+		jacobi_diag.optimizedCyclic(A2,V2);
+		Error.WriteLine("A");
+		D_test = V2.transpose()*A_before*V2;
+		WriteLine($"Is V^T A V = D ? {D_test.approx(A2)}");
+
+		A_test = V2*A2*V2.transpose();
+		WriteLine($"Is V D V^T = A ? {A_test.approx(A_before)}");
+
+		unity_1 = V2.transpose()*V2;
+		WriteLine($"Is V^T V = 1 ? {unity_1.approx(matrix.id(size))}");
+
+		unity_2 = V2*V2.transpose();
+		WriteLine($"Is V V^T = 1 ? {unity_2.approx(matrix.id(size))}");
+
 	}
 	
 	static void partB() {
@@ -91,10 +111,11 @@ public class main {
 	
 	static void partCtest() {
 		int[] nlist = {10, 20, 50, 70, 100, 120, 150, 170, 200, 220, 250};
-		long times;
+		long times1;
+		long times2;
 		foreach(int n in nlist) {
-			times = diagtimes(n);
-			WriteLine($"{n}	{times}");
+			(times1, times2) = diagtimes(n);
+			WriteLine($"{n}	{times1}	{times2}");
 		}
 
 	}
@@ -127,7 +148,7 @@ public class main {
 		return (lowestE, H, V);
 	}
 
-	static long diagtimes(int n) {
+	static (long, long) diagtimes(int n) {
 		matrix J = new matrix(n,n);
 		matrix V = matrix.id(n);
 		for(int row = 0; row < n; row ++) {
@@ -138,14 +159,20 @@ public class main {
 			}
 			
 		}
+		matrix J2 = J.copy();
+		matrix V2 = V.copy();
 
-		Stopwatch watch = new Stopwatch();
-		
-		watch.Start();
+		Stopwatch watch1 = new Stopwatch();
+		Stopwatch watch2 = new Stopwatch();
+		watch1.Start();
 		jacobi_diag.cyclic(J,V);
-		watch.Stop();
-				
-		return watch.ElapsedMilliseconds;
+		watch1.Stop();
+		
+		watch2.Start();
+		jacobi_diag.optimizedCyclic(J2,V2);
+		watch2.Stop();
+		
+		return (watch1.ElapsedMilliseconds, watch2.ElapsedMilliseconds);
 
 	}
 }
