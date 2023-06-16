@@ -2,12 +2,12 @@
 .PHONY : all
 all : 224Ra.svg Out.txt
 
-224Ra.svg : 224Ra.gpi data_table.txt
-	gnuplot $<
+224Ra.svg : 224Ra.gpi data_table.txt fit_parameters.txt
+	gnuplot 224Ra.gpi
 
 data_table.txt : Out.txt
 
-Out.txt : main.exe data.txt
+Out.txt fit_parameters.txt : main.exe data.txt
 	mono < data.txt main.exe > Out.txt
 
 data.txt : make_data.exe

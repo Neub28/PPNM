@@ -21,11 +21,12 @@ public class leastsquares {
 		QRGS QR_A = new QRGS(A);
 		vector c = QR_A.solve(b);
 		
+		/* Covariance matrix */
 		matrix invA = QR_A.inverse();
 
-		matrix S = invA * invA.transpose();
+		matrix cov = invA * invA.transpose();
 
-		return (c, S);
+		return (c, cov);
 	}
 
 }

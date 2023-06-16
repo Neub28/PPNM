@@ -2,20 +2,38 @@ set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
 set output "224Ra.svg"
 
-set title "Activity as a function of time for 224 Ra"
+set title "Activity as a function of time for 224 Ra" font "Times New Roman, 19"
 set xlabel "Time, t [days]"
 set ylabel "Activity (relative units)"
 
 set tics out
 set xzeroaxis
 set yzeroaxis
+set grid
 
-a = 4.9511553496486 
-k = -0.169887082001008 
-f(x) = a+k*x
 
-set key top left
+a = system("head -n1 fit_parameters.txt | cut -d ' ' -f1")
+k = system("head -n2 fit_parameters.txt | cut -d ' ' -f2")
+da = system("head -n3 fit_parameters.txt | cut -d ' ' -f3")
+dk = system("head -n4 fit_parameters.txt | cut -d ' ' -f4")
 
-plot "data_table.txt" using ($1):($2):($3) with yerrorbars title "Measurements", \
-	f(x) with lines linetype 2 title "Fit"
+print(a)
+print(k)
+print(da)
+print(dk)
+
+f1(x) = a*exp(k*x)
+fm(x) = (a-da)*exp((k-dk)*x)
+fp(x) = (a+da)*exp((k+dk)*x)
+
+
+set xlabel "Time, t [days]" font "Times New Roman, 16"
+set ylabel "Activity, A [rel. units]" font "Times New Roman, 16"
+
+set key top right
+
+plot "data_table.txt" using ($1):($4):($5) with yerrorbars lc rgb "blue" title "Measurements", \
+f1(x) with lines linetype 2 lc rgb "blue" title "Fit", \
+fm(x) with lines lw 2 dashtype 3 lc rgb "dark-red" title "Lower bound", \
+fp(x) with lines lw 2 dashtype 3 lc rgb "dark-green" title "Upper bound"
 	

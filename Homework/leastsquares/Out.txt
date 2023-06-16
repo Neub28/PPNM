@@ -1,4 +1,4 @@
 Fitted value of k = -0.169887082001008, which gives a half-life time of 4.08004641904341 days
-The uncertainty of k is: 4.83036286060439E-05, therefore the uncertainty in the half time is 0.00116040075658574 
+The uncertainty of k is: 0.00695008119420513, therefore the uncertainty in the half time is 0.174034465763247 
 This value is now known to be: 3.66 days (http://nucleardata.nuclear.lu.se/toi/nuclide.asp?iZA=880224)
 Therefore Rutherford and Soddys half-life time value is not in agreement with the modern value within the estimated uncertainty.
