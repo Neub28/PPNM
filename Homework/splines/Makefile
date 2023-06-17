@@ -1,6 +1,9 @@
 
 .PHONY : all
 all : linpol.svg qspline.svg Out.txt
+open : 
+	xdg-open linpol.svg
+	xdg-open qspline.svg
 
 qspline.svg : qspline.gpi qtabvalues.txt qsplinevalues.txt
 	gnuplot $<

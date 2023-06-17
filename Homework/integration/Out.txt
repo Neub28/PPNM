@@ -1,8 +1,43 @@
-1) x-> [0,1] f(x) = sqrt(x): 2/3 = 0.666953909054655: True
-2) x-> [0,1] f(x) = 1/sqrt(x): 2 = 1.99996150007805: True
-3) x-> [0,1] f(x) = 4sqrt(1-x²): 3.14159265358979 = 3.14183457802727: True
-4) x-> [0,1] f(x) = ln(x)/sqrt(x): -4 = -3.99991705899915: True
+1) x-> [0,1] f(x) = sqrt(x):
+2/3 = 0.666953909054655	True
+± 0.000239292774937915
+
+2) x-> [0,1] f(x) = 1/sqrt(x):
+2 = 1.99996150007805	True
+± 0.000147900199197879
+
+3) x-> [0,1] f(x) = 4sqrt(1-x²):
+3.14159265358979 = 3.14183457802727	True
+± 0.000527311568165295
+
+4) x-> [0,1] f(x) = ln(x)/sqrt(x):
+-4 = -3.99991705899915	True
+± 0.000189914774807373
+
 A plot of tabulated values and integrated values of the error-function is in the file erf.svg
-Clenshaw-Curtis: x-> [0,1] f(x)=1/sqrt(x): 1.99999201046432 = 2: True with 16 evaluations
-Clenshaw-Curtis: x-> [0, 1] f(x) = ln(x)/sqrt(x): -3.99987385646141 = -4: True with 96 evaluations
+
+Clenshaw-Curtis: x-> [0,1] f(x)=1/sqrt(x):
+1.99999201046432 = 2	True with 16 evaluations
+± 0.000537955141801556
+
+Clenshaw-Curtis: x-> [0, 1] f(x) = ln(x)/sqrt(x):
+-3.99987385646141 = -4	True with 96 evaluations
+± 0.00023430550465435
+
 Python completed these integrals in 231 and 315 iterations
+
+Tests for integrals containing infinite bounds
+
+f(x) = 1/x²: x -> [1, ∞]
+1 = 1	True	with 4 evaluations
+± 1.11022302462516E-16 
+
+f(x) = x*exp(-x²): x -> [-∞, 0]
+-0.50036657575802 = -0.5	True	with 20 evaluations
+± 0.000239079115560342 
+
+f(x) = 1/(1+x²): x -> [-∞,∞]
+3.14169153632244 = 3.14159265358979	True	with 40 evaluations
+± 0.000352914160055465 
+
+Python completed these integrals in 15, 75 and 30 iterations.

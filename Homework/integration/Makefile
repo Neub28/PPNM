@@ -1,7 +1,7 @@
 .PHONY : all
-all : erf.svg Out.txt
+all : Erf.svg Out.txt
 
-erf.svg : erf.gpi erf.txt
+Erf.svg : erf.gpi erf.txt
 	gnuplot $<
 
 Out.txt erf.txt : main.exe 

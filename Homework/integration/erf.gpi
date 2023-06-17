@@ -1,6 +1,6 @@
 set terminal svg font "Times new Roman, 20"
 set terminal svg background "white"
-set output "erf.svg"
+set output "Erf.svg"
 set title "Plot of error function with adaptive integrator"
 
 set tics out
@@ -8,8 +8,6 @@ set xzeroaxis
 set yzeroaxis
 set grid
 set key bottom right
-
-do for [x=-2:2:1] { print x }
 
 len = 2 
 
