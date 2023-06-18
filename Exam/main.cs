@@ -12,7 +12,7 @@ class main {
 		double a = 0;
 		double b = 4;
 
-		(double i, double e) = cubature.integ2D(f, a, b, d, u, 1e-2, 1e-2);
+		(double i, double e) = cubature.integ2D(f, a, b, d, u, 1e-4, 1e-4);
 		WriteLine($"{i}	{e}	{count}");
 	}
 

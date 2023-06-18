@@ -103,8 +103,8 @@ public static class cubature {
 		double f4 = integ1D(f, x4, d4, u4, acc, eps, f(x4, x4_1), f(x4, x4_2));
 
 		/* Calculate Q and q (trapezium- and rectangle-rule) */
-		double Q = wi[0]*f1+wi[1]*f2+wi[2]*f3+wi[3]*f4;
-		double q = vi[0]*f1+vi[1]*f2+vi[2]*f3+vi[3]*f4;
+		double Q = h*(wi[0]*f1+wi[1]*f2+wi[2]*f3+wi[3]*f4);
+		double q = h*(vi[0]*f1+vi[1]*f2+vi[2]*f3+vi[3]*f4);
 
 		if(Abs(Q-q) <= acc+eps*Abs(Q)) {
 			/* Accept */
