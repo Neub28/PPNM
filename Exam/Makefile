@@ -12,3 +12,7 @@ integration.dll : cubature.cs
 clean : 
 	rm -f *.txt *.exe *.dll
 
+fastpush : 
+	git add --all
+	git commit -am "fast push"
+	git push
