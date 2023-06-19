@@ -4,19 +4,23 @@ Student number: 2021092**60**
 
 Therefore my exam project is: **8** = 60 % 26: 
 
-#Adaptive integrator
+Adaptive integrator
 -------------------
 Implement a two-dimensional integrator for integrals in the form
 
-![name](2dintegral.png)
+```math
+$$\int_{a}^{b} dy \int_{d(x)}^{u(x)} dy f(x,y)$$
+```
 
-which applies your favourite adaptive one-dimensional integrator along each of the two dimensions. The signature might be something like
+which applies your favourite adaptive one-dimensional integrator along each of the two dimensions. 
+
+The signature might be something like
 
 static double integ2D( 	Func<double,double,double> f, double a, double b, Func<double,double> d, Func<double,double> u, double acc, double eps)
 
 -------------------
 
-#Description of solution
+Description of solution
 -------------------
 The two dimensionel problem can be, alike the one dimensionel in the homeworks, be subdivided. Each of these subdivision can be likewise subdiveded, in which case the resulting integrals are one-dimensional. Therefore I have utilized a motified version of the homeworks quadrature.
 Furthermore is used both the trapezium- and rectangle-rule with the purpose of error-estimation. Finally this routine can be cast recursively depending on the wished precision. If the precision goals are not met the routine will adaptively refine the subintervals. 
