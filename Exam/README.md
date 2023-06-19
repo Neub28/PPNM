@@ -25,7 +25,7 @@ Description of solution
 The two dimensionel problem can be, alike the one dimensionel in the homeworks, be subdivided. Each of these subdivision can be likewise subdiveded, in which case the resulting integrals are one-dimensional. Therefore I have utilized a motified version of the homeworks quadrature.
 Furthermore is used both the trapezium- and rectangle-rule with the purpose of error-estimation. Finally this routine can be cast recursively depending on the wished precision. If the precision goals are not met the routine will adaptively refine the subintervals. 
 
-**cubature.cs** is used by the *integ2D* method, which takes the function, bounds, errors and optional parameters *f2* and *f3*. These are solely for recursion. The *integ2D* method uses a private method, *integ1D*, which is a modified version of the quadrature from the homeworks. This method simply fixes a x-value such that a 1D-integral can be estimated.
+The class is used with the *integ2D* method, which takes the function, bounds, errors and optional parameters *f2* and *f3*. These are solely for recursion. The *integ2D* method uses a private method, *integ1D*, which is a modified version of the quadrature from the homeworks. This method simply fixes a x-value such that a 1D-integral can be estimated.
 
 
 
