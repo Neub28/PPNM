@@ -15,6 +15,13 @@ class main {
 		double a;
 		double b;
 
+		WriteLine("Following shows the routine tested on a number of integrals and thereafter compared to python....");
+		WriteLine(" --> The C# routine finishes substantially quicker (as expected), but seems in general to use a greater extend of operations.");
+		WriteLine("");
+
+		WriteLine("Results from C#-routine:");
+		WriteLine("");
+
 		count = 0;
 		f = (x,y) => { count++; return 42*y*y-12*x;  };
 		d = x => { return Pow(x-2,2); };
@@ -49,6 +56,9 @@ class main {
 		Write("	x(y-1)			-Sqrt(2),Sqrt(2) & x²-3,1-x²	");
 		print(i,e, 0, count);
 
+		WriteLine("");
+		WriteLine("Completion time: ");
+	
 	}
 	public static void print(double i, double e, double exact, double c) {
 		Write($"{i}	{e}	{exact}		{c}");

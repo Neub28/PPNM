@@ -1,4 +1,27 @@
+Following shows the routine tested on a number of integrals and thereafter compared to python....
+ --> The C# routine finishes substantially quicker (as expected), but seems in general to use a greater extend of operations.
+
+Results from C#-routine:
+
 	Function		Bounds (a,b,d,u)		Estimate		Error			Exact		Counts
 	42y²-12x		0,4 & (x-2)²,6			11136.0008666317	0.00191159456424728	11136		86240
 	2yx²+9y³		0,9 & 2x/3,2Sqrt(x)		4811.40001402567	0.000275016289301844	4811.4		246800
 	x(y-1)			-Sqrt(2),Sqrt(2) & x²-3,1-x²	-1.25607396694702E-15	6.2803698347351E-16	0		16
+
+Completion time: 
+real 0.08
+user 0.07
+sys 0.00
+
+
+Python completed these integrals with following results: 
+	Estimate	Error			Counts
+	11136.0		1.2363443602225743e-10	441
+	4811.4		5.3417270606814775e-11	441
+	0.0		8.815410536948235e-14	441
+
+
+Completion time:
+real 0.50
+user 0.52
+sys 0.18

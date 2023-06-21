@@ -1,4 +1,4 @@
-This folder contains my solutions to the exam project for the course **ppnm**. The solution is *cubature.cs*, which implements the examination problem. Additionally are *Out.txt* which assesses the implementation on different integrals. 
+This folder contains my solutions to the exam project for the course **ppnm**. The solution is *cubature.cs*, which implements the examination problem. Additionally are *Out.txt* which assesses the implementation on different integrals and compares executing time & counts with a similar python implementation by *scipy.integrate*. 
 
 Student number: 2021092**60**
 
@@ -28,8 +28,8 @@ Furthermore is used both the trapezium- and rectangle-rule with the purpose of e
 The class is used with the *integ2D* method, which takes the function, bounds, errors and optional parameters *f2* and *f3*. These are solely for recursion. The *integ2D* method uses a private method, *integ1D*, which is a modified version of the quadrature from the homeworks. This method simply fixes a x-value such that a 1D-integral can be estimated.
 
 
-
-
-
+Self-evaluation
+-------------------
+I would assess this project to 10/10. The class integrates the tested integrals seemingly without any problems whilst also returning satisfactory results and errors. Additionally I have also compared the speed of the routine with a similar python implementation.
 
 
