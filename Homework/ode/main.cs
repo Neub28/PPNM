@@ -18,6 +18,7 @@ class main {
 	};
 
 	static void Main() {
+		WriteLine("In the files: PartA.svg & Lotka.svg are plots of the differential equations solved with the ODE-routine.");
 		var xs = new genlist<double>();
 		var ys = new genlist<vector>();
 
