@@ -10,9 +10,8 @@ The repository consists of three main folders:
 The answers to all of these are found in seperate folders with corresponding 
 
 
- ===============================================
-| #  | homework              | A | B | C | Σ   |
- ===============================================
+**| #  | homework              | A | B | C | Σ   |**
+------------------------------------------------
 | 1  | linear-equations      | 6 | 3 | 1 | 10  |
 ------------------------------------------------
 | 2  | eigenvalue-decomp     | 6 | 3 | 1 | 10  |
@@ -33,8 +32,7 @@ The answers to all of these are found in seperate folders with corresponding
 ------------------------------------------------
 | 10 | neural-network (ann)  | 6 | 3 | 1 | 10  |
 ================================================
-|                            total points: 96  |
- ===============================================
+**|                            total points: 96  |**
 
 
 Table over progress of the exercises:
