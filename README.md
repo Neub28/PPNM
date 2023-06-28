@@ -27,7 +27,7 @@ All answers are made such that a *make clean* and *make* can be run.
 Table over progress of the exercises:
 
 | #  | Exercise              | Status          |
-|:---|:---------------------:|--:|--:|--:|----:|
+|:---|:---------------------:|----------------:|
 | 1  | posix                 |  Done           |
 | 2  | git                   |  Done           |
 | 3  | hello                 |  Done           |
