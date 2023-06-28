@@ -17,10 +17,6 @@ k = system("head -n2 fit_parameters.txt | cut -d ' ' -f2")
 da = system("head -n3 fit_parameters.txt | cut -d ' ' -f3")
 dk = system("head -n4 fit_parameters.txt | cut -d ' ' -f4")
 
-print(a)
-print(k)
-print(da)
-print(dk)
 
 f1(x) = a*exp(k*x)
 fm(x) = (a-da)*exp((k-dk)*x)

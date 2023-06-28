@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 18"
 set terminal svg background "white"
-set output "plotC.svg"
+set output "PlotC.svg"
 
 set title "Neural network: φ(0) = 1, φ'(0) = 0 for φ''(t) = -φ(t)" font "Times New Roman, 18"
 

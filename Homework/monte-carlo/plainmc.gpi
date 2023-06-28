@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "plainmc.svg"
+set output "Plainmc.svg"
 set title "Plain Monte Carlo: Unit circle" \
 font "Times New Roman, 18" offset 0, -0.5
 set xlabel "Number of iterations, N" \

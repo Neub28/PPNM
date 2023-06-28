@@ -1,6 +1,6 @@
 set terminal svg font "Times New roman, 20"
 set terminal svg background "white"
-set output "partb.svg"
+set output "Partb.svg"
 
 set multiplot layout 2,1 title "Comparison of Plain Monte-Carlo and Quasi-random sampling" font "Times New Roman, 18" offset 0, 0.5 
 

@@ -1,20 +1,20 @@
 DR = 2 3 4 5 6 7 8 9 10
 RMAX = 2 3 4 5 6 7 8 9 10
 
-all : Out.txt swavefunction.svg convergence.svg diagtimes.txt times.svg
+all : Out.txt Swavefunction.svg Convergence.svg diagtimes.txt Times.svg
 
 open : 
-	xdg-open convergence.svg
-	xdg-open swavefunction.svg
-	xdg-open times.svg
+	xdg-open Convergence.svg
+	xdg-open Swavefunction.svg
+	xdg-open Times.svg
 
-swavefunction.svg : swave1.txt swave2.txt
+Swavefunction.svg : swave1.txt swave2.txt
 	gnuplot swave.gpi
 
-convergence.svg : fixeddr.txt fixedrmax.txt
+Convergence.svg : fixeddr.txt fixedrmax.txt
 	gnuplot conv.gpi
 
-times.svg : times.gpi diagtimes.txt
+Times.svg : times.gpi diagtimes.txt
 	gnuplot times.gpi
 
 Out.txt : main.exe
@@ -53,4 +53,4 @@ matrix.dll : ../classes/vector.cs ../classes/matrix.cs jacobi_diag.cs
 	mcs -target:library -out:$@ $^
 
 clean : 
-	rm *.dll *.exe *.txt
+	rm *.dll *.exe *.txt *.svg

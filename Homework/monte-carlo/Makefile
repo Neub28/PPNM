@@ -1,10 +1,10 @@
 .PHONY : 
-all : partb.svg plainmc.svg Out.txt
+all : Partb.svg Plainmc.svg Out.txt
 
-partb.svg : partb.gpi qintg.txt pintg.txt
+Partb.svg : partb.gpi qintg.txt pintg.txt
 	gnuplot $<
 
-plainmc.svg : plainmc.gpi unitcirc.txt
+Plainmc.svg : plainmc.gpi unitcirc.txt
 	gnuplot $<
 
 Out.txt unitcirc.txt qintg.txt pintg.txt : main.exe 
@@ -18,4 +18,4 @@ matrix.dll : ../classes/*.cs mcint.cs
 
 .PHONY : 
 clean : 
-	rm -f *.svg *.txt *.exe *.dll
+	rm -f *.svg *.txt *.exe *.dll *.log

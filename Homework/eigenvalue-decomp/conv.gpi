@@ -1,6 +1,6 @@
 set terminal svg
 set terminal svg background "white"
-set output "convergence.svg"
+set output "Convergence.svg"
 
 
 set multiplot layout 1,2 title "Investigation of convergence w.r.t. r_{max} and Δr" font "Times New Roman, 18"

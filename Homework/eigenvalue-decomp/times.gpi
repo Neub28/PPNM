@@ -1,6 +1,6 @@
 set terminal svg 
 set terminal svg background "white"
-set output "times.svg"
+set output "Times.svg"
 set title "Computation times" font "Times New Roman, 19"
 set tics out
 set xzeroaxis

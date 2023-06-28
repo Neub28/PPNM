@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "qspline.svg"
+set output "Qspline.svg"
 
 set multiplot layout 1,2 title"Quadratic interpolation of functions"
 set xlabel "x"

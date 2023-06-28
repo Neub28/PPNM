@@ -1,5 +1,5 @@
-set terminal eps
-set output "Graph.eps"
+set terminal svg background "white"
+set output "Graph.svg"
 set xlabel "Size of matrix, n"
 set ylabel "User time in seconds"
 set tics out
@@ -9,6 +9,7 @@ set title "Operations count for QR-decomposition"
 set key top left
 
 f(x) = a*x**3 + b*x**2 + c*x + d
+set fit quiet
 fit f(x) 'data_times.txt' via a, b, c, d
 
 plot [0: 650] [0: 2] \

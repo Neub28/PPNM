@@ -1,9 +1,9 @@
 ---------------------- Part A --------------------
 A plot of the estimated error and actual error as functions of samplings points are in plainmc.svg.
 Integral from 0 to pi of function 1/(pi³)[1-cos(x)cos(y)cos(z)]⁻1 dxdydz
-Integral is equal to:	1.36107157821448 ± 0.00914225711992511.
+Integral is equal to:	1.37949245311224 ± 0.01511986296462.
 The expcted result is:	1.3932039296856768591842462603255
-The actual error is:	-0.0321323514712017
+The actual error is:	-0.0137114765734414
 ---------------------- Part B --------------------
 I want to test my implemented Quasi-random Monte-Carlo integrator.
 I want to integrate f(r,θ,φ)=16*r*cos(θ) over the upper half of a sphere with radius 1.
@@ -11,5 +11,5 @@ The limits are r: [0:1], φ: [0: π/2], θ: [0: 2π]
 Results for N = 10000
 Analytical result:		12.5663706143592
 Quasi-random estimate:	12.5586214365149 ± 0.100873981372748
-Plain Monte-Carlo estimate:	12.5536675324528 ± 0.16771305077591
-The abs. difference is:	0.00495390406210383
+Plain Monte-Carlo estimate:	12.438324427145 ± 0.16870209189116
+The abs. difference is:	0.120297009369972

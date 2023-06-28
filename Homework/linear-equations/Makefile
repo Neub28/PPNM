@@ -1,14 +1,14 @@
 TIME = time --portability --append --output $@
 
 .PHONY : make
-make: Out.txt Graph.eps data_times.txt 
+make: Out.txt Graph.svg data_times.txt 
 
 Out.txt : main.exe 
 	mono main.exe > Out.txt
 
-Graph.eps : graph.gpi data_times.txt
+Graph.svg : graph.gpi data_times.txt
 	gnuplot $<
-	echo "NB: The plot of QR-decomp. of different sizes n er in file Graph.eps"
+	@echo "NB: The plot of QR-decomp. of different sizes n er in file Graph.svg"
 
 main.exe: main.cs matrix.dll 
 	mcs main.cs -reference:matrix.dll -out:main.exe
@@ -39,4 +39,4 @@ matrix.dll : ../classes/matrix.cs ../classes/vector.cs QRGS.cs
 
 .PHONY: clean
 clean: 
-	rm -f *.dll *.txt *.exe *.eps *.log
+	rm -f *.dll *.txt *.exe *.svg *.log

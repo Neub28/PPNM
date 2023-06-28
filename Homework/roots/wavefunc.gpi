@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman"
 set terminal svg background "white"
-set output "wavefunc.svg"
+set output "Wavefunc.svg"
 
 FONT = "Times New Roman, 14"
 FILE = "wavefunc.txt"

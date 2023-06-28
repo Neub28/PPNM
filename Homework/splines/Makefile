@@ -1,14 +1,14 @@
 
 .PHONY : all
-all : linpol.svg qspline.svg Out.txt
+all : Linpol.svg Qspline.svg Out.txt
 open : 
-	xdg-open linpol.svg
-	xdg-open qspline.svg
+	xdg-open Linpol.svg
+	xdg-open Qspline.svg
 
-qspline.svg : qspline.gpi qtabvalues.txt qsplinevalues.txt
+Qspline.svg : qspline.gpi qtabvalues.txt qsplinevalues.txt
 	gnuplot $<
 
-linpol.svg : linpol.gpi tabvalues.txt intpolvalues.txt pointvalues.txt integralvalues.txt
+Linpol.svg : linpol.gpi tabvalues.txt intpolvalues.txt pointvalues.txt integralvalues.txt
 	gnuplot $<
 
 Out.txt tabvalues.txt intpolvalues.txt pointvalues.txt qtabvalues.txt qsplinevalues.txt : main.exe

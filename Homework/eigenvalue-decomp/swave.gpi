@@ -1,6 +1,6 @@
 set terminal svg
 set terminal svg background "white"
-set output "swavefunction.svg"
+set output "Swavefunction.svg"
 set title "Hydrogen: s-wave function" font "Times New Roman, 19"
 
 set tics out

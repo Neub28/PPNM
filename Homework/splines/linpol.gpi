@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "linpol.svg"
+set output "Linpol.svg"
 
 set title "Linear interpolation of Sin"
 set xlabel "x"

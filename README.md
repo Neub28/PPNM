@@ -4,6 +4,7 @@ Repository for the course: "*Practical programming & numerical methods*" at Aarh
 The repository consists of three main folders: 
 
 **exam**	**homeworks**	**exercises**
+
 ---------------------------------
 
 The answers to all of these are found in seperate folders with corresponding 

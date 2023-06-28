@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 18"
 set terminal svg background "white"
-set output "plotA.svg"
+set output "PlotA.svg"
 
 set title "Artifical neural network compared to analytical function" font "Times New Roman, 18"
 

@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "lotka.svg"
+set output "Lotka.svg"
 
 set title "Lotka-Volterra solution"
 

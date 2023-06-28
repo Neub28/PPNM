@@ -1,10 +1,10 @@
 .PHONY : 
-all : Out.txt wavefunc.svg convergence.svg
+all : Out.txt Wavefunc.svg Convergence.svg
 
-convergence.svg : convergence.gpi acc.txt eps.txt rmin.txt rmax.txt
+Convergence.svg : convergence.gpi acc.txt eps.txt rmin.txt rmax.txt
 	gnuplot $<
 
-wavefunc.svg : wavefunc.gpi wavefunc.txt
+Wavefunc.svg : wavefunc.gpi wavefunc.txt
 	gnuplot $<
 
 Out.txt wavefunc.txt : main.exe

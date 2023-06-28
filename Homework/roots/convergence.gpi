@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "convergence.svg"
+set output "Convergence.svg"
 
 ##set margins 2,3,2,3
 

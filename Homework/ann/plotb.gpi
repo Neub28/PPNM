@@ -1,6 +1,6 @@
 set terminal svg font "Times New Roman, 20"
 set terminal svg background "white"
-set output "plotB.svg"
+set output "PlotB.svg"
 
 set multiplot layout 2,2 title "Neural-network comparsion to analytical derivative/antiderivative" font "Times New Roman, 18"
 set xzeroaxis
