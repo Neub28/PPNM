@@ -7,7 +7,7 @@ The repository consists of three main folders:
 The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
 All answers are made such that a *make clean* and *make* can be run.
 
-####Homeworks
+#### Homeworks
 ----------
 
 The following shows the progress on the homeworks:
@@ -27,7 +27,7 @@ The following shows the progress on the homeworks:
 |                  *total points*: | | | | 96  |
 
 
-####Exercises
+#### Exercises
 -----------
 
 The following shows the progress on the exercises:
