@@ -2,11 +2,14 @@ Repository for the course: "*Practical programming & numerical methods*" at Aarh
 
 The repository consists of three main folders: 
 
-**exam**	**homeworks**	**exercises**
+***exam***        ***homeworks***        ***exercises***
 
 The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
 All answers are made such that a *make clean* and *make* can be run.
 
+####Homeworks
+
+The following shows the progress on the homeworks:
 
 | #  | homework              | A | B | C | Σ   |
 |:---|:---------------------:|--:|--:|--:|----:|
@@ -23,8 +26,9 @@ All answers are made such that a *make clean* and *make* can be run.
 |                            total points: 96  |
 
 
+####Exercises
 
-Table over progress of the exercises:
+The following shows the progress on the exercises:
 
 | #  | Exercise              | Status          |
 |:---|:---------------------:|----------------:|
