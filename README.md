@@ -2,9 +2,10 @@ Repository for the course: "*Practical programming & numerical methods*" at Aarh
 
 The repository consists of three main folders: 
 
-***exam***        ***homeworks***        ***exercises***
+***exam*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***homeworks*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***exercises***
 
 The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
+
 All answers are made such that a *make clean* and *make* can be run.
 
 ### Homeworks
