@@ -25,7 +25,7 @@ The following shows the progress on the homeworks:
 | 8  | roots                 | 6 | 3 | - |  9  |
 | 9  | minimisation          | 6 | 3 | 1 | 10  |
 | 10 | neural-network (ann)  | 6 | 3 | 1 | 10  |
-|                  *total points*: | | | | 96  |
+|                  *total points*: | | | | | 96  |
 
 
 ### Exercises
