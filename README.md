@@ -1,14 +1,15 @@
 Repository for the course: "*Practical programming & numerical methods*" at Aarhus University in the spring 2023.
 
+*Student number*: 202109260
+
 The repository consists of three main folders: 
 
-***exam***        ***homeworks***        ***exercises***
+***exam*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***homeworks*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***exercises***
 
 The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
-All answers are made such that a *make clean* and *make* can be run.
 
-####Homeworks
-----------
+
+### Homeworks
 
 The following shows the progress on the homeworks:
 
@@ -24,11 +25,10 @@ The following shows the progress on the homeworks:
 | 8  | roots                 | 6 | 3 | - |  9  |
 | 9  | minimisation          | 6 | 3 | 1 | 10  |
 | 10 | neural-network (ann)  | 6 | 3 | 1 | 10  |
-|                  *total points*: | | | | 96  |
+|                  *total points*: | | | | | 96  |
 
 
-####Exercises
------------
+### Exercises
 
 The following shows the progress on the exercises:
 
