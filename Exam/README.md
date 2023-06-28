@@ -1,6 +1,6 @@
 This folder contains my solutions to the exam project for the course **ppnm**. The solution is *cubature.cs*, which implements the examination problem. Additionally are *Out.txt* which assesses the implementation on different integrals and compares executing time & counts with a similar python implementation by *scipy.integrate*. 
 
-Note: Running *make* required *python3* to be installed and the module *numpy* to be accessible. If not then the python comparison will not be shown in the *Out.txt* file.  
+Note: Running *make* requires *python3* to be installed and the module *numpy* to be accessible. If not then the python comparison will not be shown in the *Out.txt* file.  
 
 Student number: 2021092**60**
 
