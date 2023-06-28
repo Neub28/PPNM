@@ -33,7 +33,7 @@ class main {
 
 	}
 	out1.Close();
-	WriteLine("A plot of the estimated error and actual error as functions of samplings points are in plainmc.svg.");
+	WriteLine("A plot of the estimated error and actual error as functions of samplings points are in Plainmc.svg. The used function is the unit circle.");
 
 	/* Trying to calculate the integral suggested  */
 	f = delegate(vector v) {
@@ -42,7 +42,7 @@ class main {
 	(double intg, double er) = mcint.plainmc(f, 
 						new vector(0.0, 0.0, 0.0), 
 						new vector(PI, PI, PI), 100000);
-	WriteLine("Integral from 0 to pi of function 1/(pi³)[1-cos(x)cos(y)cos(z)]⁻1 dxdydz");
+	WriteLine("Integral from 0 to pi of function 1/(pi³)[1-cos(x)cos(y)cos(z)]^{⁻1} dxdydz");
 	WriteLine($"Integral is equal to:	{intg} ± {er}.");
 	WriteLine($"The expcted result is:	1.3932039296856768591842462603255");
 	WriteLine($"The actual error is:	{intg-1.3932039296856768591842462603255}");
