@@ -65,4 +65,4 @@ class main {
 		WriteLine("");
 	}
 
-} // End class
+}

@@ -9,8 +9,8 @@ Results from C#-routine:
 	x(y-1)			-Sqrt(2),Sqrt(2) & x²-3,1-x²	-1.25607396694702E-15	6.2803698347351E-16	0		16
 
 Completion time: 
-real 0.06
-user 0.05
+real 0.08
+user 0.08
 sys 0.00
 
 
@@ -21,7 +21,6 @@ Python completed these integrals with following results:
 	0.0		8.815410536948235e-14	441
 
 
-Completion time:
-real 0.37
-user 0.46
-sys 0.14
+real 0.53
+user 0.56
+sys 0.17
