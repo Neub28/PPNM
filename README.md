@@ -1,4 +1,8 @@
-Praktisk programmering &amp; numeriske metoder
+Repository for the course: "Practical programming & numerical methods" at Aarhus University in the spring 2023.
+---------------------------------
+The repository consists of three main folders: 
+**exam**   **homeworks**   **exercises**
+
 
  ==================================================
 | #  | homework                 | A | B | C | Σ   |
