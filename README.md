@@ -8,6 +8,7 @@ The answers to all of these are found in seperate folders with corresponding nam
 All answers are made such that a *make clean* and *make* can be run.
 
 ####Homeworks
+----------
 
 The following shows the progress on the homeworks:
 
@@ -23,10 +24,11 @@ The following shows the progress on the homeworks:
 | 8  | roots                 | 6 | 3 | - |  9  |
 | 9  | minimisation          | 6 | 3 | 1 | 10  |
 | 10 | neural-network (ann)  | 6 | 3 | 1 | 10  |
-|                            total points: 96  |
+|                  *total points*: | | | | 96  |
 
 
 ####Exercises
+-----------
 
 The following shows the progress on the exercises:
 
