@@ -1,17 +1,15 @@
 Repository for the course: "*Practical programming & numerical methods*" at Aarhus University in the spring 2023.
 
----------------------------------
 The repository consists of three main folders: 
 
 **exam**	**homeworks**	**exercises**
 
----------------------------------
-
-The answers to all of these are found in seperate folders with corresponding 
+The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
+All answers are made such that a *make clean* and *make* can be run.
 
 
 | #  | homework              | A | B | C | Σ   |
-------------------------------------------------
+|:---|:---------------------:|--:|--:|--:|----:|
 | 1  | linear-equations      | 6 | 3 | 1 | 10  |
 | 2  | eigenvalue-decomp     | 6 | 3 | 1 | 10  |
 | 3  | leastsquares          | 6 | 3 | 1 | 10  |
@@ -22,7 +20,7 @@ The answers to all of these are found in seperate folders with corresponding
 | 8  | roots                 | 6 | 3 | - |  9  |
 | 9  | minimisation          | 6 | 3 | 1 | 10  |
 | 10 | neural-network (ann)  | 6 | 3 | 1 | 10  |
-------------------------------------------------
+|:---|:---------------------:|--:|--:|--:|----:|
 |                            total points: 96  |
 
 
