@@ -1,0 +1,13 @@
+
+
+Python completed these integrals with following results: 
+	Estimate	Error			Counts
+	11136.0		1.2363443602225743e-10	441
+	4811.4		5.3417270606814775e-11	441
+	0.0		8.815410536948235e-14	441
+
+
+Completion time:
+real 0.88
+user 0.45
+sys 0.21

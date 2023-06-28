@@ -12,5 +12,5 @@ integration.dll : cubature.cs
 
 .PHONY : 
 clean : 
-	rm -f *.txt *.exe *.dll
+	rm -f [!PythonResults]*.txt *.exe *.dll
 
