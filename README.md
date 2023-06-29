@@ -6,7 +6,7 @@ The repository consists of three main folders:
 
 ***exam*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***homeworks*** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ***exercises***
 
-The answers to all of these are found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
+The answers to all of these can be found in seperate folders with corresponding names. Each of these has an Out.txt containing some or all of the answers. 
 
 
 ### Homeworks
